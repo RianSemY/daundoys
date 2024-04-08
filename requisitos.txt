@@ -1,0 +1,27 @@
+Objetivo:
+
+Desenvolver um sistema de cadastro de produtos e compras por meio de pedidos, com diferentes permissões de acesso para dois tipos de usuários: administradores e usuários de produtos. O sistema deve ter uma interface intuitiva e responsiva para facilitar a interação dos usuários.
+
+Funcionalidades:
+
+Cadastro de usuários: Os usuários do tipo administrador podem cadastrar novos usuários do tipo administrador, fornecendo nome de usuário, senha e outras informações necessárias.
+Aprovação de pedidos: Os administradores têm a capacidade de visualizar pedidos pendentes e aprová-los ou rejeitá-los.
+Cadastro de produtos: Os administradores podem adicionar novos produtos ao sistema, fornecendo informações como nome, descrição, preço, etc.
+
+Busca de produtos: Os usuários do tipo clientes podem buscar produtos existentes no sistema com base em diferentes critérios, como nome, categoria, preço, etc.
+Realização de pedidos: Os usuários do tipo clientes podem adicionar produtos ao carrinho e finalizar a compra, gerando um pedido que aguardará aprovação dos administradores.
+Login no sistema: para todas as funcionalidades, exceto a de busca de produtos o usuário deve estar autenticado no sistema. Após autenticação, o sistema deve possuir um botão ou link de logout para que o usuário saia com segurança do mesmo. Para esta funcionalidade você deve fazer uso de cookies, sessões e query strings.
+
+Requisitos Técnicos:
+
+O sistema deve ser desenvolvido utilizando HTML, CSS e JavaScript para a parte do cliente, e PHP para a parte do servidor.
+O bando de dados deverá ser criado no SGBD MySQL e deverá seguir a modelagem proposta em aula por meio do vídeo "Estrutura do banco de dados". A modelagem deverá ser realizada no MySQL Workbench e enviada juntamente com os arquivos do sistema.
+A interface do sistema deve ser amigável e intuitiva, com feedback visual adequado para as ações do usuário, como sucesso ou falha na realização de uma operação.
+Entrega:
+
+Os alunos devem entregar o código fonte do projeto,  juntamente com a a modelagem do banco de dados e um documento de especificação descrevendo as principais funcionalidades, tecnologias utilizadas e instruções para uso do sistema.
+
+https://www.madrugashop.com/sedas-s285?loja=952861&categoria=275&prices%5B%5D=870.8%2C1047.6
+https://www.bemboladobrasil.com.br/search?type=product&q=bong
+https://kingbong.com.br/
+https://www.donamariaheadshop.com.br/

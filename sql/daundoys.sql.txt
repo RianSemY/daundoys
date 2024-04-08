@@ -1,0 +1,125 @@
+drop database if exists daundoys;
+create database daundoys;
+use daundoys;
+
+CREATE TABLE clientes (
+    cliente_id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    endereco VARCHAR(255),
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    senha VARCHAR(100),
+    cpf VARCHAR(20)
+);
+
+-- Criação da tabela Produtos
+CREATE TABLE produtos (
+    produto_id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    descricao TEXT,
+    preco DECIMAL(10, 2),
+    estoque_disponivel INT,
+    imagem VARCHAR(255),
+    tipo VARCHAR(100)
+);
+
+-- Criação da tabela Pedidos
+CREATE TABLE pedidos (
+    pedido_id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT,
+    data_pedido DATE,
+    status_pedido ENUM('Em processamento', 'Enviado', 'Entregue', 'Cancelado'),
+    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
+);
+
+-- Criação da tabela ItensPedido
+CREATE TABLE itensPedido (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT,
+    produto_id INT,
+    quantidade INT,
+    preco_unitario DECIMAL(10, 2),
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(pedido_id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(produto_id)
+);
+
+-- Criação da tabela Funcionarios
+CREATE TABLE funcionarios (
+    funcionario_id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    cargo VARCHAR(100),
+    email VARCHAR(100),
+    cpf VARCHAR(20),
+    telefone VARCHAR(20),
+    senha VARCHAR(100)
+);
+
+
+
+INSERT INTO produtos (nome, descricao, preco, estoque_disponivel, imagem, tipo) VALUES
+('Produto 1', 'Descrição do Produto 1', 15.49, 80, 'produto (1).jpg', 'outros'),
+('Produto 2', 'Descrição do Produto 2', 15.49, 80, 'produto (2).jpg', 'outros'),
+('Produto 3', 'Descrição do Produto 3', 15.49, 80, 'produto (3).jpg', 'charuto'),
+('Produto 4', 'Descrição do Produto 4', 25.99, 60, 'produto (4).jpg', 'charuto'),
+('Produto 5', 'Descrição do Produto 5', 12.99, 120, 'produto (5).jpg', 'charuto'),
+('Produto 6', 'Descrição do Produto 6', 18.75, 90, 'produto (6).jpg', 'charuto'),
+('Produto 7', 'Descrição do Produto 7', 8.99, 150, 'produto (7).jpg', 'charuto'),
+('Produto 8', 'Descrição do Produto 8', 30.25, 45, 'produto (8).jpg', 'dichavador'),
+('Produto 9', 'Descrição do Produto 9', 22.49, 70, 'produto (9).jpg', 'dichavador'),
+('Produto 10', 'Descrição do Produto 10', 17.99, 85, 'produto (10).jpg', 'dichavador'),
+('Produto 11', 'Descrição do Produto 11', 11.25, 110, 'produto (11).jpg', 'dichavador'),
+('Produto 12', 'Descrição do Produto 12', 28.99, 55, 'produto (12).jpg', 'dichavador'),
+('Produto 13', 'Descrição do Produto 13', 14.75, 95, 'produto (13).jpg', 'dichavador'),
+('Produto 14', 'Descrição do Produto 14', 9.99, 130, 'produto (14).jpg', 'isqueiro'),
+('Produto 15', 'Descrição do Produto 15', 32.25, 40, 'produto (15).jpg', 'isqueiro'),
+('Produto 16', 'Descrição do Produto 16', 20.49, 75, 'produto (16).jpg', 'isqueiro'),
+('Produto 17', 'Descrição do Produto 17', 16.99, 100, 'produto (17).jpg', 'isqueiro'),
+('Produto 18', 'Descrição do Produto 18', 10.25, 140, 'produto (18).jpg', 'isqueiro'),
+('Produto 19', 'Descrição do Produto 19', 34.99, 35, 'produto (19).jpg', 'isqueiro'),
+('Produto 20', 'Descrição do Produto 20', 24.75, 65, 'produto (20).jpg', 'kambaya'),
+('Produto 21', 'Descrição do Produto 21', 18.99, 90, 'produto (21).jpg', 'pipe'),
+('Produto 22', 'Descrição do Produto 22', 13.25, 125, 'produto (22).jpg', 'pipe'),
+('Produto 23', 'Descrição do Produto 23', 37.49, 30, 'produto (23).jpg', 'pipe'),
+('Produto 24', 'Descrição do Produto 24', 27.99, 50, 'produto (24).jpg', 'pipe'),
+('Produto 25', 'Descrição do Produto 25', 22.25, 75, 'produto (25).jpg', 'pipe'),
+('Produto 26', 'Descrição do Produto 26', 39.99, 25, 'produto (26).jpg', 'pipe'),
+('Produto 27', 'Descrição do Produto 27', 29.75, 40, 'produto (27).jpg', 'piteira de vidro'),
+('Produto 28', 'Descrição do Produto 28', 24.99, 60, 'produto (28).jpg', 'piteira de vidro'),
+('Produto 29', 'Descrição do Produto 29', 17.25, 85, 'produto (29).jpg', 'piteira de vidro'),
+('Produto 30', 'Descrição do Produto 30', 42.49, 20, 'produto (30).jpg', 'piteira de vidro'),
+('Produto 31', 'Descrição do Produto 31', 32.99, 45, 'produto (31).jpg', 'limpador de piteira'),
+('Produto 32', 'Descrição do Produto 32', 27.25, 70, 'produto (32).jpg', 'piteira'),
+('Produto 33', 'Descrição do Produto 33', 44.99, 15, 'produto (33).jpg', 'piteira'),
+('Produto 34', 'Descrição do Produto 34', 34.75, 35, 'produto (34).jpg', 'piteira'),
+('Produto 35', 'Descrição do Produto 35', 29.99, 55, 'produto (35).jpg', 'piteira'),
+('Produto 36', 'Descrição do Produto 36', 22.25, 80, 'produto (36).jpg', 'piteira'),
+('Produto 37', 'Descrição do Produto 37', 47.49, 10, 'produto (37).jpg', 'seda'),
+('Produto 38', 'Descrição do Produto 38', 37.99, 30, 'produto (38).jpg', 'seda'),
+('Produto 39', 'Descrição do Produto 39', 32.25, 50, 'produto (39).jpg', 'seda'),
+('Produto 40', 'Descrição do Produto 40', 24.49, 75, 'produto (40).jpg', 'seda'),
+('Produto 41', 'Descrição do Produto 41', 49.99, 5, 'produto (41).jpg', 'seda'),
+('Produto 42', 'Descrição do Produto 42', 39.75, 25, 'produto (42).jpg', 'seda'),
+('Produto 43', 'Descrição do Produto 43', 34.99, 45, 'produto (43).jpg', 'seda'),
+('Produto 44', 'Descrição do Produto 44', 27.25, 70, 'produto (44).jpg', 'seda'),
+('Produto 45', 'Descrição do Produto 45', 52.49, 2, 'produto (45).jpg', 'seda'),
+('Produto 46', 'Descrição do Produto 46', 42.99, 20, 'produto (46).jpg', 'seda'),
+('Produto 47', 'Descrição do Produto 47', 37.25, 40, 'produto (47).jpg', 'blunt'),
+('Produto 48', 'Descrição do Produto 48', 59.99, 1, 'produto (48).jpg', 'blunt'),
+('Produto 49', 'Descrição do Produto 49', 49.75, 30, 'produto (49).jpg', 'blunt'),
+('Produto 50', 'Descrição do Produto 50', 44.99, 50, 'produto (50).jpg', 'blunt'),
+('Produto 51', 'Descrição do Produto 51', 44.99, 50, 'produto (51).jpg', 'blunt'),
+('Produto 52', 'Descrição do Produto 52', 44.99, 50, 'produto (52).jpg', 'outros'),
+('Produto 53', 'Descrição do Produto 53', 44.99, 50, 'produto (53).jpg', 'outros'),
+('Produto 54', 'Descrição do Produto 54', 44.99, 50, 'produto (54).jpg', 'outros'),
+('Produto 55', 'Descrição do Produto 55', 44.99, 50, 'produto (55).jpg', 'outros');
+	
+
+INSERT INTO clientes (nome, endereco, email, telefone, senha, cpf) VALUES
+('Cliente 1', 'Endereço 1', 'a@a', '123456789', 'asasas', '222'),
+('Cliente 2', 'Endereço 2', 'cliente2@example.com', '987654321', 'a', '333'),
+('Cliente 3', 'Endereço 3', 'cliente3@example.com', '456123789', 'b', '444');
+
+
+INSERT INTO funcionarios (nome, cargo, email, telefone, senha) VALUES
+('Rian', 'Dono', 'a@a.com', '111222333', 'aaa'),
+('Funcionário', 'Entregador', 'fun@a.com', '444555666', 'bbb');

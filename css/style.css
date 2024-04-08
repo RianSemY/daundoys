@@ -1,0 +1,463 @@
+/* ------------------------------------------------- padroes ------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oxanium', cursive;
+    outline: none;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+    width: 7px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: gray;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(105, 105, 105);
+}
+::-webkit-scrollbar-thumb:active{
+    background-color: rgb(90, 90, 90);
+}
+/* ------------------------------------------------- comuns ------------------------------------------------- */
+
+.bodyLogin{
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header{
+    list-style: none;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: 0px 10px 70px -10px rgba(0,0,0,0.34);
+    z-index: 3;
+    height: 8rem;
+    margin-bottom: 20px;
+}
+nav{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.navList{
+    display: flex;
+    width: 100%;
+    width: 800px;
+    justify-content: space-between;
+    display: flex;
+}
+.navItem a{
+    justify-content: space-between;
+    display: flex;
+    color: darkgreen;
+    font-weight: bold;
+    text-decoration: none;
+    padding:10px;
+    border-radius: 5px;
+    transition: .2s ease-in;
+
+    &:hover{
+        /*color: rgb(76, 230, 76);*/
+        background-color: darkgreen;
+        color: white;
+        cursor: pointer;
+    }
+}
+.header-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+}
+.header-row img{
+    width: 200px;
+}
+.header-row #searchbar{
+    height: 40px;
+    width: 500px;
+    border-radius: 50px;
+    padding-left: 20px;
+    font-size: 14px;
+    background-color: rgb(226, 225, 225);
+    border: 1px solid gray;
+    box-shadow: 0px 0px 15px -2px rgba(0,0,0,0.32);
+}
+.header-row-list{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+}
+.searchBtn{
+    border: none;
+    position: absolute;
+    background-color: transparent;
+    right: 0;
+    margin-right: 7px;
+}
+.search:hover{
+    color: gray;
+    cursor: pointer;
+}
+.logo{
+    height: 100%;
+}
+.logoContainer{
+    margin-left: 40px;
+    height: 100%;
+    display: flex;
+    place-items: center;
+}
+.item{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.buttons{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    margin-right: 30px;
+    padding: 10px;
+}
+.buttons a{
+    text-decoration: none;
+    color: darkgreen;
+    display: flex;
+    align-items: center;
+    transition: .3s;
+    font-size: 20px;
+    &:hover{
+        color: rgb(77, 211, 77);
+        cursor: pointer;
+    }
+}
+#carrinho, #conta{
+    font-size: 2rem;
+    margin-right: 5px;
+}
+.dropdown-btn {
+    color: green;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    transition: .3s;
+}
+.dropdown:hover .dropdown-btn {
+    color: rgb(77, 211, 77);
+}
+
+.dropdown-btn:hover {
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+    padding: 12px 16px;
+}
+.dropdown-content .material-symbols-outlined {
+    margin-right: 7px;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    text-align: center;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* ------------------------------------------------- Login ------------------------------------------------- */
+
+.imgLogin{
+    margin-left: 100px;
+}
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    padding: 15px;
+    padding-top: 50px;
+    margin-right: 130px;
+    margin-top: 50px;
+}
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+.loginContainer input{
+    padding: 10px;
+    padding-left: 40px;
+    border: none;
+    border-bottom: 2px solid gray;
+    background-image: transparent;
+    font-size: 20px;
+    transition: 0.4s ease;
+    &:focus{
+        box-shadow: inset 0px -39px 62px -67px rgba(0,128,0,0.91);
+        border-bottom: #008000 2px solid;
+    }
+}
+.loginContainer label{
+    font-size: 20px;
+    margin-top: 20px;
+}
+.loginContainer span{
+    position: absolute;
+    margin-top: 48px;
+    margin-left: 3px;
+    font-size: 30px;
+    color: rgb(83, 83, 83);
+}
+.submitContainer{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.submitContainer input{
+    background-color: darkgreen;
+    padding: 10px;
+    width: 250px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 29px 0px rgba(0,199,0,0.47);
+    margin-top: 20px;
+    height: 60px;
+    &:hover{
+        background-color: green;
+        cursor: pointer;
+    }
+    &:active{
+        background-color: rgb(0, 148, 0);
+    }
+}
+.submitContainer span{
+    position: relative;
+    font-size: 18px;
+}
+.submitContainer span a{
+    color: green;
+    &:hover{
+        color:rgb(30, 184, 30);
+    }
+}
+.inputContainer div{
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+    &:hover{cursor: pointer;}
+}
+.inputContainer .eyeBtn{
+    &:hover{color:gray;}
+    &:active{color: rgb(0, 0, 0);}    
+}
+
+/* ------------------------------------------------- Registro ------------------------------------------------- */
+
+.registroContainer{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    position: relative;
+}
+.registrarBody{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+.inputReg input{
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    font-size: 18px;
+    border: none;
+    margin-bottom: 30px;
+    position: relative;
+    border-bottom: 2px solid gray;
+    transition: .4s ease;
+    &:focus{
+        box-shadow: inset 0px -39px 62px -67px rgba(0,128,0,0.91);
+        border-bottom: #008000 2px solid;
+    }
+}
+.registroContainer label{
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+}
+.inputReg .redDot{
+    color: red;
+    margin-left: 2px;
+}
+
+/* ------------------------------------------------- Catálogo ------------------------------------------------- */
+.catalogoBody{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.produtosList{
+    width: 85%;
+    display: grid;
+    padding-bottom: 50px;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.produtoContainer{
+    height: 460px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    justify-content: center;
+    text-align: center;
+    transition: ease .4s;
+    &:hover{
+        box-shadow: 0px 0px 22px -3px rgba(0,0,0,0.5);
+    }
+}
+.imgProduto{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+.imgProduto img{
+    display: flex;
+    height: 200px;
+    min-height: 200px;
+    max-height: 400px;
+    z-index: -1;
+}
+.sobreporProduto{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    position: absolute;
+    opacity: 0;
+    z-index:1;
+    transition: ease .4s;
+    &:hover{
+        opacity: 1;
+    }
+}
+.footerSobrepor{
+    background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.85) 4%, rgba(255, 255, 255, 1) 30%, rgba(255,255,255,1) 100%);
+    width: 100%;
+    height: 110px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: end;
+    padding: 15px;
+}
+.footerSobrepor button{
+    background-color: white;
+    color: rgb(0, 153, 0);
+    font-weight: bold;
+    border: 3px solid rgb(0, 153, 0);
+    border-radius: 0px 10px 10px 0px;
+    padding: 10px;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.5);
+    transition: .15s ease;
+    &:hover{
+        background-color: #008000;
+        cursor: pointer;
+        color: white;
+        border: 3px solid transparent;
+    }
+    &:active{
+        background-color: #006800;
+    }
+}
+.footerSobrepor a{
+    text-decoration: none;
+}
+.footerSobrepor input{
+    width: 80px;
+    height: 50px;
+    font-size: 18px;
+    padding-left: 10px;
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.5);
+    padding-right: 5px;
+}
+.nomeProduto{
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    margin: 10px;
+}
+.precoProduto{
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: darkgreen;
+    text-decoration: underline;
+    margin-bottom: 15px;
+    margin: 10px;
+}
+.descProduto{
+    text-align:justify;
+    margin: 10px;
+}
+.addProduto{
+    text-decoration: none;
+    color: white;
+    background-color: green;
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(0, 146, 0);
+    }
+    &:active{
+        background-color: green;
+    }
+}
+.addProduto span{
+    font-size: 10rem;
+}
+.addProduto p{
+    font-size: 2rem;
+}
