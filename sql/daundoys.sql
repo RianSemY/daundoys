@@ -121,6 +121,6 @@ INSERT INTO clientes (nome, endereco, email, telefone, senha, cpf) VALUES
 ('Cliente 3', 'Endereço 3', 'cliente3@example.com', '456123789', 'b', '444');
 
 
-INSERT INTO funcionarios (nome, cargo, email, telefone, senha) VALUES
-('Rian', 'Dono', 'a@a.com', '111222333', 'aaa'),
-('Funcionário', 'Entregador', 'fun@a.com', '444555666', 'bbb');
+INSERT INTO funcionarios (nome, cargo, email, telefone, senha, cpf) VALUES
+('Rian', 'Dono', 'a@a.com', '111222333', 'aaa', '21312'),
+('Funcionário', 'Entregador', 'fun@a.com', '444555666', 'bbb', '32443');

@@ -17,6 +17,14 @@
         ?>
         <main class="registrarBody">
             <form method="post" action="controller/registroClientesController.php" class="registroContainer">
+                <?php
+                @$cod = $_REQUEST['cod'];
+                if(isset($cod)){
+                    if ($cod == '172') {
+                        echo '<p class="errorMsg">As senhas não coincidem</p>';
+                    }
+                }
+                ?>
                 <div class="inputReg">
                     <label for="nome">Nome de usuário <span class="redDot">*</span></label>
                     <input type="text" name="nome" id="nome" placeholder="Digite seu nome de usuário" required/>

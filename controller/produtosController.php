@@ -21,7 +21,7 @@ if ($_POST) {
         $tipos_permitidos = array("jpg", "png", "jpeg");
         if (!in_array($tipo, $tipos_permitidos)) {
             // Tipo de arquivo não permitido
-            header('location: registrarProduto.php?cod=error');
+            header('location: ../registrarProduto.php?cod=error');
             exit;
         }
 

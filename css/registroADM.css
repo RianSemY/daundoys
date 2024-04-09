@@ -1,0 +1,184 @@
+/* ------------------------------------------------- padroes ------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oxanium', cursive;
+    outline: none;
+}
+body{
+    min-width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: gray;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(105, 105, 105);
+}
+::-webkit-scrollbar-thumb:active{
+    background-color: rgb(90, 90, 90);
+}
+.containerReg{
+    display: flex;
+    justify-content: center;
+}
+.registrarProduto{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+.registrarProduto form{
+    display: flex;
+    padding-top: 50px;
+    flex-direction: column;
+    width: 600px;
+    gap: 20px;
+}
+.registrarProduto form .material-symbols-outlined{
+    margin-top: 24px;
+    margin-left: 2px;
+    position: absolute;
+}
+.formControl{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+.formControl label{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.registrarProduto .formControl input[type="text"],
+.registrarProduto .formControl input[type="number"]{
+    padding: 5px;
+    padding-left: 30px;
+    font-size: 1.2rem;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid gray;
+}
+input[type="file"]{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.registrarProduto input[type="submit"], .submitContainer input[type="submit"]{
+    font-size: 1.5rem;
+    background-color:rgb(0, 128, 0);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    height: 50px;
+    &:hover{
+        background-color: rgb(0, 104, 0);
+        color: rgb(214, 214, 214);
+    }
+    &:active{
+        background-color: green;
+        color: white;
+    }
+}
+
+.backToThePage{
+    background-color: transparent;
+    text-decoration: none;
+    color: green;
+    display: flex;
+    position: absolute;
+    padding: 10px;
+    border: 5px solid green;
+    border-radius: 50px;
+    left: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: all ease .2s;
+    &:hover{
+        background-color: green;
+        color:white;
+    }
+    &:active{
+        background-color: rgb(0, 99, 0);
+        border: 5px solid rgb(0, 99, 0);
+        color: lightgray;
+    }
+}
+.backToThePage span{
+    font-weight: bold;
+    font-size: 2.3rem;
+}
+#Ldesc{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+textarea{
+    max-width: 100%;
+    height: 50px;
+    max-height: 150px;
+    border: none;
+    border: 2px solid gray;
+    padding: 5px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+/* -------------------------------------------- Registrar funcionario -------------------------------------------- */
+.gerenciarFuncionario{
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    height: 100%;
+}
+.registrarFuncionario{
+    display: flex;
+    width: 40%;
+    min-width: 280px;
+    height: 100%;
+}
+.registrarFuncionario form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    padding: 10px;
+    padding-top: 50px;
+}
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+}
+.inputGroup input, select{
+    padding: 5px;
+    font-size: 1.2rem;
+}
+
+.inputGroup select{
+    display: flex;
+    padding: 10px;
+    font-size: 1.3rem;
+    align-items: center;
+    border: 3px solid gray;
+    &:focus{
+        border: 3px solid green;
+    }
+}
+.inputGroup input{
+    border: none;
+    border-bottom: 3px solid gray;
+    &:focus{
+        border-bottom: 3px solid green;
+    }
+}
+.inputGroup label{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.redDot{
+    color: red;
+}

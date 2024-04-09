@@ -10,12 +10,28 @@
         </div>
         
         <div class="buttons">
+            <?php
+            session_start();
+            require_once 'controller/funcionariosController.php';
+            if(isset($_SESSION['admin'])){
+                echo '<style>.buttons{
+                    width: 450px;
+                    </style>';
+                echo '<div class="dropdown">';
+                    echo '<button class="dropdown-btn admButtom"><span class="material-symbols-outlined">admin_panel_settings </span>Opções de ADM</button>';
+                    echo '<div class="dropdown-content">';
+                        echo '<a href="registrarProduto.php"><span class="material-symbols-outlined">inventory</span>Adicionar novo produto</a>';
+                        echo '<a href="registrarFuncionário.php"><span class="material-symbols-outlined">manage_accounts</span>Gerir funcionários</a>';
+                        echo '<a href="#"></a>';
+                    echo '</div>';
+                echo '</div>';
+            }
+            ?>
             <div class="dropdown">
-                <div class="dropdown-btn" href="#"><span class="material-symbols-outlined" id="conta">account_circle </span>Conta</div>
+                <div class="dropdown-btn"><span class="material-symbols-outlined" id="conta">account_circle </span>Conta</div>
                 <div class="dropdown-content">
                     <?php
-                    session_start();
-                    if(!isset($_SESSION['login'])){
+                    if(!isset($_SESSION['login']) and !isset($_SESSION['admin'])){
                         echo '<a href="login.php"><span class="material-symbols-outlined">login</span> Login</a>';
                         echo '<a href="registro.php"><span class="material-symbols-outlined">person_add</span> Registrar-se</a>';
                     } else{
@@ -28,7 +44,7 @@
             </div>
             <?php
 
-            if(isset($_SESSION['login'])){
+            if(isset($_SESSION['login']) or isset($_SESSION['admin'])){
                 echo '<a href="carrinho.php"><span class="material-symbols-outlined" id="carrinho">shopping_cart </span>Carrinho</a>';
             } else{
                 echo '<a href="login.php?cod=173"><span class="material-symbols-outlined" id="carrinho">shopping_cart </span>Carrinho</a>';
@@ -45,6 +61,11 @@
             <ul class="navItem"><a href="index.php?type=to_smoke">To smoke</a></ul>
             <ul class="navItem"><a href="index.php?type=acessorios">Acessórios</a></ul>
             <ul class="navItem"><a href="index.php?type=outros">Outros</a></ul>
+            <?php
+            // if(isset($_SESSION['admin']) and loadFunction($_SESSION['admin']) == 'Dono'){
+            //     echo '<ul class="navItem"><a href="registrarFuncionário.php">Registrar funcionário</a></ul>';
+            // }
+            ?>
         </li>
     </nav>
     <script>

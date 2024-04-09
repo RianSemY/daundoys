@@ -11,7 +11,6 @@ body{
     width: 100%;
     height: 100vh;
     position: relative;
-    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar{
@@ -131,6 +130,7 @@ nav{
 }
 .buttons{
     display: flex;
+    align-items: center;
     width: 300px;
     justify-content: space-between;
     margin-right: 30px;
@@ -148,9 +148,13 @@ nav{
         cursor: pointer;
     }
 }
-#carrinho, #conta{
+.admButtom{
+    border: 0;
+    background-color: transparent;
+}
+.admButtom span, #carrinho, #conta{
+    margin-right: 4px;
     font-size: 2rem;
-    margin-right: 5px;
 }
 .dropdown-btn {
     color: green;
@@ -198,6 +202,7 @@ nav{
 
 .imgLogin{
     margin-left: 100px;
+    filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.8));
 }
 .loginContainer{
     display: flex;
@@ -460,4 +465,16 @@ nav{
 }
 .addProduto p{
     font-size: 2rem;
+}
+.errorMsg{
+    width: 100%;
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 30px;
 }

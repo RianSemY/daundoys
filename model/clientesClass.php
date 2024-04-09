@@ -68,24 +68,15 @@ class clientesClass{
         $this->cpf = $cpf;
     }
 
-    public function loginConfirm(){
+    public function autenticarCliente($email, $senha) {
         $db = new ConexaoMysql();
         $db->Conectar();
-        $sql = 'SELECT * FROM clientes where email="'.$this->email.'" and senha="'.$this->senha.'";';
-        $db->Executar($sql);
+        $email = $db->getConnection()->real_escape_string($email);
+        $senha = $db->getConnection()->real_escape_string($senha);
+        $sql = "SELECT cliente_id FROM clientes WHERE email = '$email' AND senha = '$senha'";
+        $resultado = $db->Consultar($sql);
         $db->Desconectar();
-
-        return $db->total;
-    }
-    public function takeId(){
-        $db = new ConexaoMysql();
-        $db->Conectar();
-        
-        $sql = 'SELECT * FROM clientes where email="'.$this->email.'" and senha="'.$this->senha.'";';
-        $result = $db->Consultar($sql);
-        
-        $db->Desconectar();
-        return $result;
+        return $resultado->num_rows == 1 ? $resultado->fetch_assoc()['cliente_id'] : false;
     }
     
     public function loadAll() {
@@ -103,5 +94,16 @@ class clientesClass{
         $db->Executar($sql);
         $db->Desconectar();
         return $db->total;
+    }
+
+    public function checkEmailExistence($email) {
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $email = $db->getConnection()->real_escape_string($email);
+        $sql = "SELECT COUNT(*) AS count FROM clientes WHERE email = '$email'";
+        $resultado = $db->Consultar($sql);
+        $db->Desconectar();
+        $row = $resultado->fetch_assoc();
+        return $row['count'] > 0;
     }
 }
