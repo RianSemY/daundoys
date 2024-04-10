@@ -11,7 +11,7 @@ if ($_POST) {
     @$confirmarSenha = $_POST['confirmarSenha'];
     if (isset($nome) and isset($email) and isset($senha) and
     isset($cargo) and isset($telefone) and isset($cpf) and
-    isset($confirmarSenha) and $confirmarSenha === $senha and $cargo!='') {
+    isset($confirmarSenha) and $confirmarSenha === $senha) {
 
         require_once '../model/clientesClass.php';
         $cliente = new clientesClass();
@@ -21,8 +21,22 @@ if ($_POST) {
         $funcionario = new funcionariosClass();
         $funcionarioExiste = $funcionario->checkEmailExistence($email);
 
+        $cpfChar = strlen($cpf);
+        $telefoneChar = strlen($telefone);
+        if ($telefoneChar < 16){
+            header('location:../registrarFuncionario.php?cod=invalid_telefone');
+            exit();
+        }
+        if ($cpfChar < 14){
+            header('location:../registrarFuncionario.php?cod=invalid_cpf');
+            exit();
+        }
+        if($cargo == ''){
+            header('location:../registrarFuncionario.php?cod=invalid_cargo');
+            exit();
+        }
         if ($funcionarioExiste || $clienteExiste) {
-            header('location:../registrarFuncionário.php?cod=email_exists');
+            header('location:../registrarFuncionario.php?cod=email_exists');
             exit();
         }
 
@@ -34,11 +48,11 @@ if ($_POST) {
         $funcionario->setCpf($cpf);
         
         $funcionario->insert();
-        header('location:../registrarFuncionário.php?cod=sucess');
+        header('location:../registrarFuncionario.php?cod=sucess');
     } else{
-        header('location:../registrarFuncionário.php?cod=172');
+        header('location:../registrarFuncionario.php?cod=172');
         exit();
     }
 } else {
-    header('location:../registrarFuncionário.php?cod=error');
+    header('location:../registrarFuncionario.php?cod=error');
 }

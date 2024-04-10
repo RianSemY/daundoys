@@ -47,10 +47,8 @@ main{
 }
 .produtoCarrinho{
     display: flex;
-    height: 300px;
 }
 .infoProdutoCarrinho{
-    height: 100%;
     width: 100%;
     display: flex;
     place-items: center;
@@ -87,7 +85,6 @@ footer{
     justify-content: space-between;
 }
 footer button{
-    margin-right: 50px;
     height: 70px;
     border: 2px solid green;
     background-color: white;
@@ -110,6 +107,7 @@ footer button{
     color: green;
     display: flex;
     position: absolute;
+    z-index: 3;
     padding: 10px;
     border: 5px solid green;
     border-radius: 50px;
@@ -203,6 +201,7 @@ footer button{
 }
 .carroVazio{
     height: 100%;
+    z-index: 1;
     display: flex;
     align-items: center;
 }
@@ -222,4 +221,56 @@ footer button{
     width: 100%;
     justify-content: center;
     font-size: 2rem;
+}
+
+@media screen and (max-width:1000px){
+    .inFooter{
+        justify-content: center;
+        gap: 60px;
+    }
+}
+@media screen and (max-width:600px){
+    .backToThePage{
+        padding: 5px;
+        border: none;
+        border: 2px solid green;
+        transition: none;
+        &:hover{
+            border: 2px solid green;
+        }
+        &:active{
+            border: 2px solid green;
+        }
+    }
+    .backToThePage span{
+        font-size: 1.7rem;
+    }
+    .produtoCarrinho{
+        display: flex;
+        height: 300px;
+    }
+    .nomeCarrinho{
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+    .precoCarrinho{
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+    .imgContainer{
+        height: 130px;
+    }
+    .imgContainer img{
+        height: 130px;
+    }
+    .precoTotalProduto{
+        font-size: 1.1rem;
+    }
+    .inFooter{
+        gap: 30px;
+    }
+    footer button{
+        min-width: 150px;
+    }
 }

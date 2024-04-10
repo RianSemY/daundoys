@@ -128,22 +128,22 @@ foreach ($_SESSION['carrinho'] as $produto) {
                     foreach ($_SESSION['carrinho'] as $produto) {
                         echo '<div class="produtoCarrinho">';
                             echo '<div class="imgContainer"><img src="img/imgBanco/' . $produto['imagem'] . '" alt="' . $produto['nome'] . '"/></div>';
-                            echo '<div class="infoProdutoCarrinho">';
-                                echo '<div class="textprodutoCarrinho">';
-                                    echo '<p class="nomeCarrinho">' . $produto['nome'] . '</p>';
-                                    echo '<form class="qntEditor" action="carrinho.php" method="post">';
-                                        echo '<input type="hidden" name="action" value="updateQuantity">';
-                                        echo '<input type="hidden" name="produto_id" value="'.$produto['id'].'">';
-                                        //echo '<p class="qntLabel">Quantidade:</p>';
-                                        echo '<button class="qntBtn quantDown" type="submit" name="nova_quantidade" value="'.$produto['qntRequerida'] - 1 .'">-</button>';
-                                        echo '<p class="qntBtn viewQnt">'. $produto['qntRequerida'] .'</p>';
-                                        echo '<button class="qntBtn quantUp" type="submit" name="nova_quantidade" value="'.$produto['qntRequerida'] + 1 .'">+</button>';
-                                    echo '</form>';
-                                    echo '<p class="precoCarrinho">Preço (unidade): R$'.number_format($produto['preco'], 2, ',', '.').'</p>';
+                                echo '<div class="infoProdutoCarrinho">';
+                                    echo '<div class="textprodutoCarrinho">';
+                                        echo '<p class="nomeCarrinho">' . $produto['nome'] . '</p>';
+                                        echo '<form class="qntEditor" action="carrinho.php" method="post">';
+                                            echo '<input type="hidden" name="action" value="updateQuantity">';
+                                            echo '<input type="hidden" name="produto_id" value="'.$produto['id'].'">';
+                                            //echo '<p class="qntLabel">Quantidade:</p>';
+                                            echo '<button class="qntBtn quantDown" type="submit" name="nova_quantidade" value="'.$produto['qntRequerida'] - 1 .'">-</button>';
+                                            echo '<p class="qntBtn viewQnt">'. $produto['qntRequerida'] .'</p>';
+                                            echo '<button class="qntBtn quantUp" type="submit" name="nova_quantidade" value="'.$produto['qntRequerida'] + 1 .'">+</button>';
+                                        echo '</form>';
+                                        echo '<p class="precoCarrinho">Preço (unidade): R$'.number_format($produto['preco'], 2, ',', '.').'</p>';
 
-                                $precoTotalProduto = $produto['qntRequerida'] * $produto['preco'];
-                                echo '<p class="precoTotalProduto">Preço a ser pago: R$'.number_format($precoTotalProduto, 2, ',', '.').'</p>';
-                                echo '<form class="containerRemove" action="carrinho.php" method="post">';
+                                    $precoTotalProduto = $produto['qntRequerida'] * $produto['preco'];
+                                    echo '<p class="precoTotalProduto">Preço a ser pago: R$'.number_format($precoTotalProduto, 2, ',', '.').'</p>';
+                                    echo '<form class="containerRemove" action="carrinho.php" method="post">';
                                         echo '<input type="hidden" name="action" value="removeItem">';
                                         echo '<input type="hidden" name="produto_id" value="'.$produto['id'].'">';
                                         echo '<button type="submit"><span class="material-symbols-outlined">delete</span></button>';

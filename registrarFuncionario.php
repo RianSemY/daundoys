@@ -14,6 +14,11 @@
         <main class="registrarFuncionario">
             <form method="post" action="controller/registrarFuncionarioController.php" class="registroContainer">
                 <?php
+                session_start();
+                if(!isset($_SESSION['admin'])){
+                    header('location: index.php');
+                    exit();
+                }
                 @$cod = $_REQUEST['cod'];
                 if(isset($cod)){
                     if ($cod == '172') {
@@ -40,29 +45,72 @@
                 <div class="inputGroup">
                     <label for="cargo">Escolha o cargo de seu funcionário <span class="redDot">*</span></label>
                     <select name="cargo" id="cargo">
-                        <option selected style="display:none" value="">Escolha um cargo</option>
+                        <option selected style="display:none" value="">Escolha um cargo</option>    
+                        <option value="Gerente">Gerente</option>
                         <option value="Repositor">Repositor</option>
                         <option value="Entregador">Entregador</option>
-                        <option value="Gerente">Gerente</option>
                         <option value="Suporte">Suporte</option>
                     </select>
                 </div>
                 <div class="inputGroup">
                     <label for="telefone">Telefone <span class="redDot">*</span></label>
-                    <input type="number" name="telefone" id="telefone" placeholder="Digite seu número de telefone para contato" required>
+                    <input type="text" name="telefone" id="telefone" placeholder="Digite seu número de telefone para contato" required>
                 </div>
                 <div class="inputGroup">
                     <label for="cpf">Número de CPF <span class="redDot">*</span></label>
-                    <input type="number" name="cpf" id="cpf" placeholder="Digite seu número de CPF" required>
+                    <input type="text" name="cpf" id="cpf" placeholder="Digite seu número de CPF" required>
                 </div>
                 <div class="submitContainer">
                     <input type="submit" value="Enviar informações">
                 </div>
             </form>
+            <div class="funcionariosManager">
+                <table class="tablesFuncionarios">
+                    <thead>
+                        <th>ID</th>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Senha</th>
+                        <th>Cargo</th>
+                        <th>Número de telefone</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        require_once 'controller/funcionariosController.php';
+                        $funcionariosList = loadAllFuncionarios();
+
+                        foreach($funcionariosList as $funcionario){
+                            echo '<tr>';
+                                echo '<td id="funcionario_idTable">';
+                                    echo $funcionario['funcionario_id'];
+                                echo '</td>';
+                                echo '<td id="cpfTable">';
+                                    echo $funcionario['cpf'];
+                                echo '</td>';
+                                echo '<td id="nomeTable">';
+                                    echo $funcionario['nome'];
+                                echo '</td>';
+                                echo '<td id="emailTable">';
+                                    echo $funcionario['email'];
+                                echo '</td>';
+                                echo '<td id="senhaTable">';
+                                    echo $funcionario['senha'];
+                                echo '</td>';
+                                echo '<td id="cargoTable">';
+                                    echo $funcionario['cargo'];
+                                echo '</td>';
+                                echo '<td id="telefoneTable">';
+                                    echo $funcionario['telefone'];
+                                echo '</td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </main>
-        <div class="tablesFuncionrios">
-            <table>a</table>
-        </div>
     </div>
+    <script src="js/script.js"></script>
 </body>
 </html>

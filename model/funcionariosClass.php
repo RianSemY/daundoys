@@ -87,7 +87,7 @@ class funcionariosClass {
         return $cargo;
     }
 
-    public function loadAll() {
+    public function loadAllFuncionarios() {
         $db = new ConexaoMysql();
         $db->Conectar();
         $sql = "SELECT * FROM funcionarios";

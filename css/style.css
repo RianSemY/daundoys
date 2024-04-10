@@ -12,6 +12,43 @@ body{
     height: 100vh;
     position: relative;
 }
+.sideHeader{
+    position: fixed;
+    height: 100%;
+    width: 300px;
+    z-index: 2;
+    background-color: darkgreen;
+    top: 0;
+    left: -300px;
+    display: none;
+    transition: .4s ease-out;
+}
+.activeSideHeader{
+    position: fixed;
+    z-index: 3;
+    padding: 10px;
+    background-color: darkgreen;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    left: 0;
+    top: 0;
+    margin-top: 15px;
+    margin-left: 15px;
+    display: none;
+    transition: .2s all;
+    &:hover{
+        color: rgb(156, 156, 156);
+    }
+    &:active{
+        background-color: rgb(21, 151, 21);
+        color: white;
+    }
+}
+.activeSideHeader .material-symbols-outlined{
+    font-size: 2.3rem;
+    
+}
 
 ::-webkit-scrollbar{
     width: 7px;
@@ -40,7 +77,6 @@ header{
     background-color: transparent;
     box-shadow: 0px 10px 70px -10px rgba(0,0,0,0.34);
     z-index: 3;
-    height: 8rem;
     margin-bottom: 20px;
 }
 nav{
@@ -88,7 +124,10 @@ nav{
 }
 .header-row #searchbar{
     height: 40px;
+    min-width: 200px;
     width: 500px;
+    max-width: 500px;
+    display: flex;
     border-radius: 50px;
     padding-left: 20px;
     font-size: 14px;
@@ -298,6 +337,7 @@ nav{
     display: flex;
     flex-direction: column;
     width: 900px;
+    padding: 20px;
     position: relative;
 }
 .registrarBody{
@@ -394,7 +434,7 @@ nav{
     align-items: end;
     padding: 15px;
 }
-.footerSobrepor button{
+.footerSobrepor button, .footerSobrepor .fakebtn{
     background-color: white;
     color: rgb(0, 153, 0);
     font-weight: bold;
@@ -477,4 +517,64 @@ nav{
     font-weight: bold;
     justify-content: center;
     margin-bottom: 30px;
+}
+@media screen and (max-width: 1100px){
+    .imgLogin{
+        display: none;
+    }
+    .loginContainer{
+        padding: 0;
+        margin: 0;
+        margin-top: 100px;
+        width: 100%;
+        padding: 20px;
+    }
+    .header-row #searchbar{
+        width: 300px;
+    }
+}
+@media screen and (max-width: 910px){
+    .logoContainer{
+        display: none;
+    }
+    .header-row #searchbar{
+        width: 300px;
+    }
+}
+@media screen and (max-width: 610px){
+    header{
+        display: none;
+        position: absolute;
+    }
+    .activeSideHeader{
+        display:block;
+    }
+    .sideHeader{
+        display:flex;
+    }
+    .produtosList{
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+    }
+    .produtoContainer{
+        width: 220px;
+        height: 530px;
+    }
+    .submitContainer{
+        flex-direction: column;
+    }
+    .registroContainer{
+        width: 100%;
+        margin-top: 100px;
+    }
+}
+@media screen and (max-width: 550px){
+    .produtoContainer{
+        width: 375px;
+        height: 450px;
+    }
+    .submitContainer input{
+        width: 100%;
+    }
 }

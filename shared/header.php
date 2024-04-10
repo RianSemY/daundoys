@@ -1,3 +1,17 @@
+<button class="activeSideHeader" onclick="toggleSideHeader()"><span class="material-symbols-outlined">menu_open</span></button>
+<div class="sideHeader" id="sideHeader">
+    <div class="linksList">
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+        <a href="#" class="linksItem"></a>
+    </div>
+</div>
+
 <header>
 <div class="header-row">
     <div class="header-row-list">
@@ -21,7 +35,7 @@
                     echo '<button class="dropdown-btn admButtom"><span class="material-symbols-outlined">admin_panel_settings </span>Opções de ADM</button>';
                     echo '<div class="dropdown-content">';
                         echo '<a href="registrarProduto.php"><span class="material-symbols-outlined">inventory</span>Adicionar novo produto</a>';
-                        echo '<a href="registrarFuncionário.php"><span class="material-symbols-outlined">manage_accounts</span>Gerir funcionários</a>';
+                        echo '<a href="registrarFuncionario.php"><span class="material-symbols-outlined">manage_accounts</span>Gerir funcionários</a>';
                         echo '<a href="#"></a>';
                     echo '</div>';
                 echo '</div>';
@@ -68,9 +82,4 @@
             ?>
         </li>
     </nav>
-    <script>
-        function toggleDropdown(dropdown) {
-            dropdown.classList.toggle('active');
-        }
-    </script>
 </header>

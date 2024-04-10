@@ -47,11 +47,11 @@
                 </div>
                 <div class="inputReg">
                     <label for="telefone">Telefone <span class="redDot">*</span></label>
-                    <input type="number" name="telefone" id="telefone" placeholder="Digite seu número de telefone para contato" required>
+                    <input type="text" name="telefone" id="telefone" placeholder="Digite seu número de telefone para contato" required>
                 </div>
                 <div class="inputReg">
                     <label for="cpf">Número de CPF <span class="redDot">*</span></label>
-                    <input type="number" name="cpf" id="cpf" placeholder="Digite seu número de CPF" required>
+                    <input type="text" name="cpf" id="cpf" placeholder="Digite seu número de CPF" required>
                 </div>
                 <div class="submitContainer">
                     <span>Já tem uma conta? <a href="login.php">Entrar</a></span>
@@ -59,5 +59,6 @@
                 </div>
             </form>
         </main>
+        <script src="js/script.js"></script>
     </body>
     </html>

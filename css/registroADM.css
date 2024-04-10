@@ -90,6 +90,7 @@ input[type="file"]{
 .backToThePage{
     background-color: transparent;
     text-decoration: none;
+    z-index: 2;
     color: green;
     display: flex;
     position: absolute;
@@ -132,26 +133,28 @@ textarea{
 .gerenciarFuncionario{
     display: flex;
     justify-content: center;
-    place-items: center;
-    height: 100%;
+    width: 100%;
 }
 .registrarFuncionario{
     display: flex;
-    width: 40%;
-    min-width: 280px;
-    height: 100%;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+    gap: 50px;
 }
 .registrarFuncionario form{
     display: flex;
+    padding-top: 50px;
     flex-direction: column;
     width: 100%;
     gap: 20px;
-    padding: 10px;
-    padding-top: 50px;
 }
 .inputGroup{
     display: flex;
     flex-direction: column;
+    width: 100%;
+
 }
 .inputGroup input, select{
     padding: 5px;
@@ -181,4 +184,62 @@ textarea{
 }
 .redDot{
     color: red;
+}
+.funcionariosManager{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.tablesFuncionarios{
+    border-collapse: collapse;
+    min-width: 800px;
+}
+.tablesFuncionarios thead{
+    background-color: gray;
+}
+.tablesFuncionarios th{
+    border: 1px solid black;
+    padding: 8px;
+}
+.tablesFuncionarios td{
+    border: 1px solid black;
+    text-align: center;
+    min-height: 40px;
+    padding: 8px;
+}
+#funcionario_idTable{
+    width: 30px;
+}
+#cpfTable{
+    width: 130px;
+}
+#nomeTable{
+    width: 130px;
+}
+#cpfTable{
+    width: 150px;
+}
+#telefoneTable{
+    min-width: 150px;
+    width: 150px;
+}
+
+@media screen and (max-width: 800px) {
+    .tablesFuncionarios{
+        max-width: 100%;
+        min-width: 0px;
+    }
+    .funcionariosManager{
+        overflow-x: auto;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .registrarFuncionario{
+        flex-direction: column ;
+    }
+    .tablesFuncionarios{
+        max-width: 100%;
+        width: 100%;
+    }
 }

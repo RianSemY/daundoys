@@ -9,11 +9,10 @@ function printar($produto){
                 echo '<input type="hidden" name="imagemProduto[]" value="'.$produto['imagem'].'">';
             
                 echo '<input type="number" class="estoqueInput" name="qntRequerida[]" min="1" max="'.$produto['estoque_disponivel'].'" value="1"/>';
-                if(!isset($_SESSION['login'])){
-                    echo '<a href="login.php?cod=173"><button>Comprar agora</button></a>';
-                } else {
+                if(isset($_SESSION['login']) or isset($_SESSION['admin'])){
                     echo '<button>Comprar agora</button></a>';
-                }
+                } else {
+                    echo '<a class="fakebtn" href="login.php?cod=173">Comprar agora</a>';                }
             echo'</form>';
         echo'</div>';
         echo '<div class="imgProduto">';

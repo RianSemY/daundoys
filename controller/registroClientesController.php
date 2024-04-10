@@ -25,6 +25,17 @@ if ($_POST) {
             exit();
         }
 
+        $cpfChar = strlen($cpf);
+        $telefoneChar = strlen($telefone);
+        if ($telefoneChar < 16){
+            header('location:../registro.php?cod=invalid_telefone');
+            exit();
+        }
+        if ($cpfChar < 14){
+            header('location:../registro.php?cod=invalid_cpf');
+            exit();
+        }
+
         
         $cliente->setEmail($email);
         $cliente->setTelefone($telefone);
