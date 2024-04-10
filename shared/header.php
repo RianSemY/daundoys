@@ -1,14 +1,35 @@
+<?php
+session_start();
+?>
 <button class="activeSideHeader" onclick="toggleSideHeader()"><span class="material-symbols-outlined">menu_open</span></button>
 <div class="sideHeader" id="sideHeader">
-    <div class="linksList">
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
-        <a href="#" class="linksItem"></a>
+    <div class="linksListContainer">
+        <div class="linksList">
+            <a href="index.php">Home</a>
+            <a href="index.php?type=piteiras_e_filtros">Piteiras e filtros</a>
+            <a href="index.php?type=sedas_e_blunts">Sedas e blunts</a>
+            <a href="index.php?type=to_smoke">To smoke</a>
+            <a href="index.php?type=acessorios">Acessórios</a>
+            <a href="index.php?type=outros">Outros</a>
+        </div>
+        <div class="loginList">
+            <?php
+            if(!isset($_SESSION['admin']) and !isset($_SESSION['login'])){
+                echo '<a href="login.php">Logar-se</a>';
+                echo '<a href="registro.php">Registrar-se</a>';
+            }
+            ?>
+        </div>
+            <?php
+            echo '<div class="adminList">';
+                if(isset($_SESSION['admin'])){
+                    echo '<a href="gerenciarPedidos.php">Gerenciar pedidos</a>';
+                    echo '<a href="registrarFuncionario.php">Gerenciar funcionários</a>';
+                    echo '<a href="registrarProduto.php">Gerenciar produtos</a>';
+                }
+            echo '</div>';
+            ?>
+        </div>
     </div>
 </div>
 
@@ -25,7 +46,6 @@
         
         <div class="buttons">
             <?php
-            session_start();
             require_once 'controller/funcionariosController.php';
             if(isset($_SESSION['admin'])){
                 echo '<style>.buttons{
@@ -34,9 +54,9 @@
                 echo '<div class="dropdown">';
                     echo '<button class="dropdown-btn admButtom"><span class="material-symbols-outlined">admin_panel_settings </span>Opções de ADM</button>';
                     echo '<div class="dropdown-content">';
-                        echo '<a href="registrarProduto.php"><span class="material-symbols-outlined">inventory</span>Adicionar novo produto</a>';
-                        echo '<a href="registrarFuncionario.php"><span class="material-symbols-outlined">manage_accounts</span>Gerir funcionários</a>';
-                        echo '<a href="#"></a>';
+                        echo '<a href="registrarProduto.php"><span class="material-symbols-outlined">inventory</span>Gerenciar novo produto</a>';
+                        echo '<a href="registrarFuncionario.php"><span class="material-symbols-outlined">manage_accounts</span>Gerenciar funcionários</a>';
+                        echo '<a href="gerenciarPedidos.php"><span class="material-symbols-outlined">request_page</span>Gerenciar pedidos</a>';
                     echo '</div>';
                 echo '</div>';
             }
@@ -69,7 +89,7 @@
 </div>
     <nav>
         <li class="navList">
-            <ul class="navItem"><a href="index.php">Home</a></a></ul>
+            <ul class="navItem"><a href="index.php">Home</a></ul>
             <ul class="navItem"><a href="index.php?type=piteiras_e_filtros">Piteiras e filtros</a></ul>
             <ul class="navItem"><a href="index.php?type=sedas_e_blunts">Sedas e blunts</a></ul>
             <ul class="navItem"><a href="index.php?type=to_smoke">To smoke</a></ul>

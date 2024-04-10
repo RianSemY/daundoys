@@ -45,6 +45,26 @@ body{
         color: white;
     }
 }
+.linksListContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+}
+.linksList, .loginList, .adminList{
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    margin-top: 30px;
+}
+.linksList a, .loginList a, .adminList a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+    padding: 10px;
+}
 .activeSideHeader .material-symbols-outlined{
     font-size: 2.3rem;
     
@@ -125,6 +145,7 @@ nav{
 .header-row #searchbar{
     height: 40px;
     min-width: 200px;
+    margin-left: 10px;
     width: 500px;
     max-width: 500px;
     display: flex;
