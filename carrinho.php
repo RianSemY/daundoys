@@ -6,92 +6,76 @@ if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
 }
 
-// Processar a solicitação de remoção de um item do carrinho
-if ($_POST && isset($_POST['action']) && $_POST['action'] === 'removeItem') {
-    // Verificar se o produto a ser removido está presente no carrinho
-    if (isset($_POST['produto_id'])) {
-        $produtoId = $_POST['produto_id'];
-        
-        // Percorrer o carrinho e remover o item com o ID especificado
-        foreach ($_SESSION['carrinho'] as $indice => $produto) {
-            if ($produto['id'] == $produtoId) {
-                unset($_SESSION['carrinho'][$indice]);
-                break;
-            }
-        }
-    }
-}
+if ($_POST) {
+    if(isset($_POST['action'])) { //ver se está pedindo uma ação interna
+/* ----------------------------------------- REMOVER CARRINHO ----------------------------------------- */
+        if ($_POST['action'] === 'removeItem' && isset($_POST['produto_id'])) {
+            $produtoId = $_POST['produto_id'];
 
-if ($_POST && isset($_POST['action']) && $_POST['action'] === 'updateQuantity') {
-    // Verificar se todos os parâmetros necessários estão presentes na solicitação
-    if (isset($_POST['produto_id'], $_POST['nova_quantidade'])) {
-        $produtoId = $_POST['produto_id'];
-        $novaQuantidade = $_POST['nova_quantidade'];
-
-        // Verificar se a nova quantidade é maior que 0
-        if ($novaQuantidade > 0) {
-            // Atualizar a quantidade do produto no carrinho
-            foreach ($_SESSION['carrinho'] as &$produto) {
+            foreach ($_SESSION['carrinho'] as $indice => $produto) {
                 if ($produto['id'] == $produtoId) {
-                    $produto['qntRequerida'] = $novaQuantidade;
-                    
-                }
-            }
-        } else {
-            // Remover o item do carrinho se a nova quantidade for menor ou igual a 0
-            foreach ($_SESSION['carrinho'] as $chave => $produto) {
-                if ($produto['id'] == $produtoId) {
-                    unset($_SESSION['carrinho'][$chave]);
-                    
+                    unset($_SESSION['carrinho'][$indice]);
+                    break;
                 }
             }
         }
-        // Redirecionar de volta para a página do carrinho
+/* ----------------------------------------- atualizar quantidade carrinho ----------------------------------------- */
+        if ($_POST['action'] === 'updateQuantity' && isset($_POST['produto_id'], $_POST['nova_quantidade'])) {
+            $produtoId = $_POST['produto_id'];
+            $novaQuantidade = $_POST['nova_quantidade'];
+
+            if ($novaQuantidade > 0) {
+                foreach ($_SESSION['carrinho'] as &$produto) {
+                    if ($produto['id'] == $produtoId) {
+                        $produto['qntRequerida'] = $novaQuantidade;
+                    }
+                }
+            } else {
+                // Remover o item do carrinho se a nova quantidade for menor ou igual a 0
+                foreach ($_SESSION['carrinho'] as $chave => $produto) {
+                    if ($produto['id'] == $produtoId) {
+                        unset($_SESSION['carrinho'][$chave]);
+                    }
+                }
+            }
+            header("Location: carrinho.php");
+            exit;
+        }
+/* ----------------------------------------- Adicionar ao carrinho carrinho ----------------------------------------- */
+    } else if(isset($_SESSION['login']) && isset($_POST['idProduto']) && isset($_POST['nomeProduto']) && isset($_POST['precoProduto']) && isset($_POST['qntRequerida'])) {
+        // Processar a solicitação de adicionar produtos ao carrinho
+        $carrinhoIdProdutos = $_POST["idProduto"];
+        $carrinhoNomeProdutos = $_POST["nomeProduto"];
+        $carrinhoPrecoProdutos = $_POST["precoProduto"];
+        $carrinhoImagemProdutos = $_POST["imagemProduto"];
+        $carrinhoQntRequerida = $_POST["qntRequerida"];
+        for ($i = 0; $i < count($carrinhoIdProdutos); $i++) {
+            $produto = [
+                'id' => $carrinhoIdProdutos[$i],
+                'nome' => $carrinhoNomeProdutos[$i],
+                'preco' => $carrinhoPrecoProdutos[$i],
+                'imagem' => $carrinhoImagemProdutos[$i],
+                'qntRequerida' => $carrinhoQntRequerida[$i]
+            ];
+
+            $produtoNoCarrinho = false;
+            foreach ($_SESSION['carrinho'] as &$item) {
+                if ($item['id'] == $produto['id']) {
+                    $item['qntRequerida'] += $produto['qntRequerida'];
+                    $produtoNoCarrinho = true;
+                    break;
+                }
+            }
+            if (!$produtoNoCarrinho) {
+                $_SESSION['carrinho'][] = $produto;
+            }
+        }
         header("Location: carrinho.php");
         exit;
     }
 }
 
-// Calcular o preço total do carrinho
-$precoTotalCarrinho = 0;
-foreach ($_SESSION['carrinho'] as $produto) {
-    $precoTotalCarrinho += $produto['qntRequerida'] * $produto['preco'];
-}
-
-
-// Processar a solicitação de adicionar produtos ao carrinho
-if ($_POST && isset($_SESSION['login']) && isset($_POST['idProduto']) && isset($_POST['nomeProduto']) && isset($_POST['precoProduto']) && isset($_POST['qntRequerida'])) {
-    $carrinhoIdProdutos = $_POST["idProduto"];
-    $carrinhoNomeProdutos = $_POST["nomeProduto"];
-    $carrinhoPrecoProdutos = $_POST["precoProduto"];
-    $carrinhoImagemProdutos = $_POST["imagemProduto"];
-    $carrinhoQntRequerida = $_POST["qntRequerida"];
-    for ($i = 0; $i < count($carrinhoIdProdutos); $i++) {
-        $produto = [
-            'id' => $carrinhoIdProdutos[$i],
-            'nome' => $carrinhoNomeProdutos[$i],
-            'preco' => $carrinhoPrecoProdutos[$i],
-            'imagem' => $carrinhoImagemProdutos[$i],
-            'qntRequerida' => $carrinhoQntRequerida[$i]
-        ];
-
-        $produtoNoCarrinho = false;
-        foreach ($_SESSION['carrinho'] as &$item) {
-            if ($item['id'] == $produto['id']) {
-                $item['qntRequerida'] += $produto['qntRequerida'];
-                $produtoNoCarrinho = true;
-                break;
-            }
-        }
-        if (!$produtoNoCarrinho) {
-            $_SESSION['carrinho'][] = $produto;
-        }
-    }
-    header("Location: carrinho.php");
-    exit;
-}
-
-// Calcular o preço total do carrinho
+/* ----------------------------------------- Calcular o preço total do carrinho ----------------------------------------- */
 $precoTotalCarrinho = 0;
 foreach ($_SESSION['carrinho'] as $produto) {
     $precoTotalCarrinho += $produto['qntRequerida'] * $produto['preco'];
@@ -113,6 +97,7 @@ foreach ($_SESSION['carrinho'] as $produto) {
         <a href="index.php" class="backToThePage"><span class="material-symbols-outlined"> arrow_back </span></a>
         <div class="carrinhoContainer">
             <?php
+/* ----------------------------------------- ver se o carrinho está vazio ----------------------------------------- */
             if(empty($_SESSION['carrinho'])){
                 echo '<div class="carroVazio">';
                     echo '<div>';
@@ -124,6 +109,7 @@ foreach ($_SESSION['carrinho'] as $produto) {
             ?>
             <div class="carrinhoContainerList">
                 <?php 
+/* ----------------------------------------- print do carrinho ----------------------------------------- */
                 if(!empty($_SESSION['carrinho'])){
                     foreach ($_SESSION['carrinho'] as $produto) {
                         echo '<div class="produtoCarrinho">';
@@ -131,10 +117,10 @@ foreach ($_SESSION['carrinho'] as $produto) {
                                 echo '<div class="infoProdutoCarrinho">';
                                     echo '<div class="textprodutoCarrinho">';
                                         echo '<p class="nomeCarrinho">' . $produto['nome'] . '</p>';
+/* ----------------------------------------- Form editar carrinho ----------------------------------------- */                                    
                                         echo '<form class="qntEditor" action="carrinho.php" method="post">';
                                             echo '<input type="hidden" name="action" value="updateQuantity">';
                                             echo '<input type="hidden" name="produto_id" value="'.$produto['id'].'">';
-                                            //echo '<p class="qntLabel">Quantidade:</p>';
                                             echo '<button class="qntBtn quantDown" type="submit" name="nova_quantidade" value="'.$produto['qntRequerida'] - 1 .'">-</button>';
                                             echo '<p class="qntBtn viewQnt">'. $produto['qntRequerida'] .'</p>';
                                             echo '<button class="qntBtn quantUp" type="submit" name="nova_quantidade" value="'.$produto['qntRequerida'] + 1 .'">+</button>';
@@ -143,6 +129,7 @@ foreach ($_SESSION['carrinho'] as $produto) {
 
                                     $precoTotalProduto = $produto['qntRequerida'] * $produto['preco'];
                                     echo '<p class="precoTotalProduto">Preço a ser pago: R$'.number_format($precoTotalProduto, 2, ',', '.').'</p>';
+/* ----------------------------------------- Form remover do carrinho ----------------------------------------- */                                    
                                     echo '<form class="containerRemove" action="carrinho.php" method="post">';
                                         echo '<input type="hidden" name="action" value="removeItem">';
                                         echo '<input type="hidden" name="produto_id" value="'.$produto['id'].'">';
@@ -160,11 +147,23 @@ foreach ($_SESSION['carrinho'] as $produto) {
     <footer>
         <div class="inFooter">
             <?php
+/* ----------------------------------------- Calcular preco do carrinho ----------------------------------------- */                                    
             echo '<p class="precoTotalProdutos">Preço total do carrinho:'; 
             echo '<strong>R$'.number_format($precoTotalCarrinho, 2, ',', '.').'</strong>';
             echo '</p>';
             ?>
-            <button type="submit">Comprar</button>
+            <form method="post" action="controller/carrinhoController.php">
+                <?php
+/* ----------------------------------------- Inputs "falsos" para mandar para a controller  ----------------------------------------- */                                    
+                foreach ($_SESSION['carrinho'] as $produto) {
+                    echo '<input type="hidden" name="produtos[]" value="' . $produto['id'] . '">';
+                    echo '<input type="hidden" name="quantidades[]" value="' . $produto['qntRequerida'] . '">';
+                }
+                echo '<input type="hidden" name="precoTotalCarrinho" value="' . $precoTotalCarrinho . '">';
+                echo '<input type="hidden" name="usuarioID" value="' . $_SESSION['login'] . '">';
+                ?>
+                <button type="submit">Comprar</button>
+            </form> 
         </div>
     </footer>
 </body>

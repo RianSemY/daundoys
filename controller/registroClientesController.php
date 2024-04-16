@@ -11,8 +11,12 @@ if ($_POST) {
     @$confirmarSenha = $_POST['confirmarSenha'];
     if (isset($nome) and isset($email) and isset($senha) and
     isset($endereco) and isset($telefone) and isset($cpf) and
-    isset($confirmarSenha) and $confirmarSenha === $senha) {
+    isset($confirmarSenha)) {
 
+        if($confirmarSenha !== $senha){
+            header('location:../registro.php?cod=wrong_pass');
+            exit();
+        }
         require_once '../model/clientesClass.php';
         $cliente = new clientesClass();
         $clienteExiste = $cliente->checkEmailExistence($email);

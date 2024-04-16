@@ -14,14 +14,14 @@ if ($_POST) {
 
         if ($clienteId) {
             $_SESSION['login'] = $clienteId;
-            header('location:../index.php?cod=cliente');
+            header('location:../index.php');
         } else {
             $funcionario = new funcionariosClass();
             $funcionarioId = $funcionario->autenticarFuncionario($email, $senha);
             if ($funcionarioId) {
                 $_SESSION['admin'] = $funcionarioId;
                 echo $funcionarioId;
-                header('location:../index.php?cod=adm');
+                header('location:../index.php');
             } else {
                 header('location:../login.php?cod=171');
             }

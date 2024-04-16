@@ -111,6 +111,31 @@
             </div>
         </main>
     </div>
-    <script src="js/script.js"></script>
+    <script>
+            /* -------------------------------- mascara numero de celular -------------------------------- */
+            document.getElementById('telefone').addEventListener('input', function(event){
+                let input = event.target;
+                let numCelular = input.value.replace(/\D/g, '');
+                if (numCelular.length > 11) {
+                    numCelular = numCelular.slice(0, 11);
+                }
+                numCelular = numCelular.replace(/^(\d{2})(\d)/g, '($1) $2');
+                numCelular = numCelular.replace(/(\d{1})(\d{4})(\d{4})$/, '$1 $2-$3');
+                input.value = numCelular
+            });
+
+        /* -------------------------------- mascara numero de cpf -------------------------------- */
+            document.getElementById('cpf').addEventListener('input', function(event){
+                let input = event.target;
+                let cpf = input.value.replace(/\D/g, '');
+                if (cpf.length > 11) {
+                    cpf = cpf.slice(0, 11);
+                }
+                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+                cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                input.value = cpf;
+            });
+        </script>
 </body>
 </html>

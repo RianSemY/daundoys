@@ -87,6 +87,21 @@ class clientesClass{
         $db->Desconectar();
         return $resultList;
     }
+    public function loadNomeCliente($id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = "SELECT nome FROM clientes where cliente_id = '$id'";
+        $result = $db->Consultar($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $nome = $row['nome'];
+        } else {
+            $nome = null;
+        }
+        $db->Desconectar();
+        return $nome;
+    }
+    
     public function insert(){
         $db = new ConexaoMysql();
         $db->Conectar();

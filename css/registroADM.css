@@ -164,6 +164,7 @@ textarea{
 .inputGroup select{
     display: flex;
     padding: 10px;
+    color: #000;
     font-size: 1.3rem;
     align-items: center;
     border: 3px solid gray;
@@ -206,6 +207,7 @@ textarea{
     text-align: center;
     min-height: 40px;
     padding: 8px;
+    text-decoration: none;
 }
 #funcionario_idTable{
     width: 30px;
@@ -218,6 +220,7 @@ textarea{
 }
 #cpfTable{
     width: 150px;
+    min-width: 150px;
 }
 #telefoneTable{
     min-width: 150px;

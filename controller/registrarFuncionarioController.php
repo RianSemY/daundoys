@@ -11,8 +11,12 @@ if ($_POST) {
     @$confirmarSenha = $_POST['confirmarSenha'];
     if (isset($nome) and isset($email) and isset($senha) and
     isset($cargo) and isset($telefone) and isset($cpf) and
-    isset($confirmarSenha) and $confirmarSenha === $senha) {
+    isset($confirmarSenha)) {
 
+        if($confirmarSenha !== $senha){
+            header('location:../registro.php?cod=wrong_pass');
+            exit();
+        }
         require_once '../model/clientesClass.php';
         $cliente = new clientesClass();
         $clienteExiste = $cliente->checkEmailExistence($email);
@@ -49,7 +53,8 @@ if ($_POST) {
         
         $funcionario->insert();
         header('location:../registrarFuncionario.php?cod=sucess');
-    } else{
+    } 
+    else{
         header('location:../registrarFuncionario.php?cod=172');
         exit();
     }

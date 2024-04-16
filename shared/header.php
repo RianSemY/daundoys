@@ -1,7 +1,12 @@
 <?php
 session_start();
+
 ?>
-<button class="activeSideHeader" onclick="toggleSideHeader()"><span class="material-symbols-outlined">menu_open</span></button>
+<div class="mobileHeader">
+    <button class="mobileButton activeSideHeader" onclick="toggleSideHeader()"><span class="material-symbols-outlined">menu_open</span></button>
+    <img src="img/logo.png" alt="logo"/>
+    <a class="mobileButton carButton" href="carrinho.php"><span class="material-symbols-outlined">store</span></a>
+</div>
 <div class="sideHeader" id="sideHeader">
     <div class="linksListContainer">
         <div class="linksList">
@@ -12,23 +17,44 @@ session_start();
             <a href="index.php?type=acessorios">Acessórios</a>
             <a href="index.php?type=outros">Outros</a>
         </div>
-        <div class="loginList">
-            <?php
-            if(!isset($_SESSION['admin']) and !isset($_SESSION['login'])){
-                echo '<a href="login.php">Logar-se</a>';
-                echo '<a href="registro.php">Registrar-se</a>';
-            }
-            ?>
-        </div>
-            <?php
-            echo '<div class="adminList">';
-                if(isset($_SESSION['admin'])){
-                    echo '<a href="gerenciarPedidos.php">Gerenciar pedidos</a>';
-                    echo '<a href="registrarFuncionario.php">Gerenciar funcionários</a>';
-                    echo '<a href="registrarProduto.php">Gerenciar produtos</a>';
-                }
+        <?php
+        if(!isset($_SESSION['admin']) and !isset($_SESSION['login'])){
+            echo '<div class="loginList">';
+                echo '<button id="loginDrop-btn"><span class="material-symbols-outlined">person</span>Usuário</button>';
+                echo '<div id="loginDrop-content">';
+                    echo '<a href="login.php">Logar-se</a>';
+                    echo '<a href="registro.php">Registrar-se</a>';
+                echo '</div>';
             echo '</div>';
-            ?>
+
+        } else{
+            echo '<div class="loginList">';
+                echo '<button onclick="openDropbox()" id="loginDrop-btn"><span class="material-symbols-outlined">person</span>';
+                    require_once 'controller/clientesController.php';
+                    require_once 'controller/funcionariosController.php';
+                    if (isset($_SESSION['login'])){
+                        echo ''.loadNomeCliente($_SESSION['login']).'';
+                    } else if (isset($_SESSION['admin'])){
+                        echo ''.loadNomeFuncionario($_SESSION['admin']).'';
+                    } else{
+                        echo 'Conta';
+                    }
+                echo '</button>';
+                echo '<div id="loginDrop-content">';
+                    echo '<a href="controller/logout.php">Logout</a>';
+                echo '</div>';
+        echo '</div>';
+        }
+        ?>
+        <?php
+        echo '<div class="adminList">';
+            if(isset($_SESSION['admin'])){
+                echo '<a href="gerenciarPedidos.php">Gerenciar pedidos</a>';
+                echo '<a href="registrarFuncionario.php">Gerenciar funcionários</a>';
+                echo '<a href="registrarProduto.php">Gerenciar produtos</a>';
+            }
+        echo '</div>';
+        ?>
         </div>
     </div>
 </div>
@@ -61,8 +87,19 @@ session_start();
                 echo '</div>';
             }
             ?>
+
             <div class="dropdown">
-                <div class="dropdown-btn"><span class="material-symbols-outlined" id="conta">account_circle </span>Conta</div>
+                <div class="dropdown-btn"><span class="material-symbols-outlined" id="conta">account_circle</span>
+                    <?php
+                    if (isset($_SESSION['login'])){
+                        echo ''.loadNomeCliente($_SESSION['login']).'';
+                    } else if (isset($_SESSION['admin'])){
+                        echo ''.loadNomeFuncionario($_SESSION['admin']).'';
+                    } else{
+                        echo 'Conta';
+                    }
+                    ?>
+                </div>
                 <div class="dropdown-content">
                     <?php
                     if(!isset($_SESSION['login']) and !isset($_SESSION['admin'])){
@@ -95,11 +132,6 @@ session_start();
             <ul class="navItem"><a href="index.php?type=to_smoke">To smoke</a></ul>
             <ul class="navItem"><a href="index.php?type=acessorios">Acessórios</a></ul>
             <ul class="navItem"><a href="index.php?type=outros">Outros</a></ul>
-            <?php
-            // if(isset($_SESSION['admin']) and loadFunction($_SESSION['admin']) == 'Dono'){
-            //     echo '<ul class="navItem"><a href="registrarFuncionário.php">Registrar funcionário</a></ul>';
-            // }
-            ?>
         </li>
     </nav>
 </header>

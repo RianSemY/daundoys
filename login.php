@@ -45,13 +45,13 @@
                 <span class="material-symbols-outlined loginIcons">lock</span>
                 <label for="password">Senha: </label>
                 <input type="password" name="senha" id="senha" placeholder="Insira sua senha" required>
-                <div class="eyeBtn" onclick="versenha()"><span class="material-symbols-outlined eyeBtn">visibility_off</span></div>
+                <div class="eyeBtn"><span onclick="versenha()" class="material-symbols-outlined eye">visibility_off</span></div>
             </div>
             <div class="submitContainer">
                 <span>Não tem uma conta? <a href="registro.php">Cadastre-se</a></span>
                 <input type="submit" value="Logar">
             </div>
-</rom>
+    </form>
     </main>
     <script src="js/script.js"></script>
 </body>

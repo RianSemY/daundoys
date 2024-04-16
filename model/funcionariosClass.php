@@ -72,6 +72,7 @@ class funcionariosClass {
         $db->Desconectar();
         return $resultado->num_rows == 1 ? $resultado->fetch_assoc()['funcionario_id'] : false;
     }
+    
     public function loadFunction($id){
         $db = new ConexaoMysql();
         $db->Conectar();
@@ -85,6 +86,21 @@ class funcionariosClass {
         }
         $db->Desconectar();
         return $cargo;
+    }
+
+    public function loadNomeFuncionario($id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = "SELECT nome FROM funcionarios where funcionario_id = '$id'";
+        $result = $db->Consultar($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $nome = $row['nome'];
+        } else {
+            $nome = null;
+        }
+        $db->Desconectar();
+        return $nome;
     }
 
     public function loadAllFuncionarios() {
