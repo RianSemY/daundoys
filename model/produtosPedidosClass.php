@@ -2,7 +2,7 @@
 require_once 'conexao.php';
 
 class produtosPedidosClass{
-    private $item_id;
+    private $itemInPedido_id;
     private $pedido_id;
     private $produto_id;
     private $quantidade;
@@ -11,8 +11,8 @@ class produtosPedidosClass{
         
     }
     // Getters
-    public function getItemId() {
-        return $this->item_id;
+    public function getItemInPedidoId() {
+        return $this->itemInPedido_id;
     }
 
     public function getPedidoId() {
@@ -29,8 +29,8 @@ class produtosPedidosClass{
 
 
     // Setters
-    public function setItemId($item_id) {
-        $this->item_id = $item_id;
+    public function setItemInPedidoId($itemInPedido_id) {
+        $this->itemInPedido_id = $itemInPedido_id;
     }
 
     public function setPedidoId($pedido_id) {
@@ -46,19 +46,54 @@ class produtosPedidosClass{
     }
 
     
-    public function inserirCadaProduto($produtoIDlist, $produtoQTDlist){
+    public function inserirCadaProduto($produtoIDlist, $produtoQTDlist, $produto_id){
         $db = new ConexaoMysql();
         $db->Conectar();
-    
-        // Iterar sobre as listas de produtos e quantidades
         for ($i = 0; $i < count($produtoIDlist); $i++) {
-            // Inserir cada par de produto e quantidade no banco de dados
-            $sql = 'INSERT INTO itensPedido (pedido_id, produto_id, quantidade) values (404, "'.$produtoIDlist[$i].'", "'.$produtoQTDlist[$i].'")';
+            
+            $sql = 'INSERT INTO itensPedido (pedido_id, produto_id, quantidade) values ("'.$produto_id.'", "'.$produtoIDlist[$i].'", "'.$produtoQTDlist[$i].'");';
             $db->Executar($sql);
         }
-    
         $db->Desconectar();
         return $db->total;
+    }
+
+    public function printByPedidoId($pedido_id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'SELECT * from itensPedido where pedido_id="'.$pedido_id.'"';
+        $resultList = $db->Consultar($sql);
+        $db->Desconectar();
+        return $resultList;
+    }
+
+    public function getNameByProdutoId($pedido_id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = "SELECT nome FROM produtos where produto_id = '$pedido_id'";
+        $result = $db->Consultar($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $nome = $row['nome'];
+        } else {
+            $nome = null;
+        }
+        $db->Desconectar();
+        return $nome;
+    }
+    public function getPrecoByProdutoId($pedido_id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = "SELECT preco FROM produtos where produto_id = '$pedido_id'";
+        $result = $db->Consultar($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $preco = $row['preco'];
+        } else {
+            $preco = null;
+        }
+        $db->Desconectar();
+        return $preco;
     }
     
 }

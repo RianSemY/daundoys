@@ -121,4 +121,19 @@ class clientesClass{
         $row = $resultado->fetch_assoc();
         return $row['count'] > 0;
     }
+
+    public function getEmailByID($id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = "SELECT email FROM clientes where cliente_id = '$id'";
+        $result = $db->Consultar($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $email = $row['email'];
+        } else {
+            $email = null;
+        }
+        $db->Desconectar();
+        return $email;
+    }
 }

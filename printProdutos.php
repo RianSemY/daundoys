@@ -7,6 +7,7 @@ function printar($produto){
                 echo '<input type="hidden" name="nomeProduto[]" value="'.$produto['nome'].'">';
                 echo '<input type="hidden" name="precoProduto[]" value="'.$produto['preco'].'">';
                 echo '<input type="hidden" name="imagemProduto[]" value="'.$produto['imagem'].'">';
+                echo '<input type="hidden" name="estoqueProduto[]" value="'.$produto['estoque_disponivel'].'">';
             
                 echo '<input type="number" class="estoqueInput" name="qntRequerida[]" min="1" max="'.$produto['estoque_disponivel'].'" value="1"/>';
                 if(isset($_SESSION['login']) or isset($_SESSION['admin'])){

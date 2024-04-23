@@ -56,11 +56,29 @@ class pedidosClass{
         $db = new ConexaoMysql();
         $db->Conectar();
         $sql = 'INSERT INTO pedidos (cliente_id, preco_pedido, status_pedido) values ("'.$this->cliente_id.'", "'.$this->preco_pedido.'", "Em processamento");';
-        $db->Executar($sql);
+        $lastID = $db->Executar($sql);
         $db->Desconectar();
-        return $db->total;
+        return $lastID;
     }
-    
+
+    public function loadAll() {
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'SELECT * FROM pedidos';
+        $resultList = $db->Consultar($sql);
+        $db->Desconectar();
+        return $resultList;
+    }
+
+        public function updateStatus($id, $novo_status){
+            $db = new ConexaoMysql();
+            $db->Conectar();
+            // echo $id; echo ' '; echo $novo_status;
+            $sql = 'UPDATE pedidos SET status_pedido = "'.$novo_status.'" where pedido_id="'.$id.'"';
+            $db->Executar($sql);
+            $db->Desconectar();
+            return $db->total;
+        }
 }
 
 

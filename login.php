@@ -1,3 +1,13 @@
+<?php
+
+    session_start();
+    if(isset($_SESSION['login']) or isset($_SESSION['admin'])){
+        header('location: index.php');
+        exit();
+    }
+    session_abort();
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,9 +21,6 @@
 <body>
     <?php 
     require_once 'shared/header.php';
-    if(isset($_SESSION['login'])){
-        header('location: index.php');
-    }
     ?>
     <main class="bodyLogin">
         <div class="imgLogin"><img src="img/duendeLogin.png" alt=""></div>

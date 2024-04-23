@@ -32,7 +32,7 @@ CREATE TABLE pedidos (
 );
 
 CREATE TABLE itensPedido (
-    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    itemInPedido_id INT AUTO_INCREMENT PRIMARY KEY,
     pedido_id INT,
     produto_id INT,
     quantidade INT,

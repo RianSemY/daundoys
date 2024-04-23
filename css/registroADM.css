@@ -1,6 +1,5 @@
 /* ------------------------------------------------- padroes ------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
-
 *{
     padding: 0;
     margin: 0;
@@ -9,11 +8,11 @@
     outline: none;
 }
 body{
-    min-width: 100%;
+    width: 100%;
     min-height: 100vh;
     position: relative;
+    overflow: hidden;
 }
-
 ::-webkit-scrollbar{
     width: 5px;
 }
@@ -26,67 +25,6 @@ body{
 ::-webkit-scrollbar-thumb:active{
     background-color: rgb(90, 90, 90);
 }
-.containerReg{
-    display: flex;
-    justify-content: center;
-}
-.registrarProduto{
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-}
-.registrarProduto form{
-    display: flex;
-    padding-top: 50px;
-    flex-direction: column;
-    width: 600px;
-    gap: 20px;
-}
-.registrarProduto form .material-symbols-outlined{
-    margin-top: 24px;
-    margin-left: 2px;
-    position: absolute;
-}
-.formControl{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-}
-.formControl label{
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-.registrarProduto .formControl input[type="text"],
-.registrarProduto .formControl input[type="number"]{
-    padding: 5px;
-    padding-left: 30px;
-    font-size: 1.2rem;
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid gray;
-}
-input[type="file"]{
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-.registrarProduto input[type="submit"], .submitContainer input[type="submit"]{
-    font-size: 1.5rem;
-    background-color:rgb(0, 128, 0);
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 50px;
-    padding: 10px;
-    height: 50px;
-    &:hover{
-        background-color: rgb(0, 104, 0);
-        color: rgb(214, 214, 214);
-    }
-    &:active{
-        background-color: green;
-        color: white;
-    }
-}
-
 .backToThePage{
     background-color: transparent;
     text-decoration: none;
@@ -115,9 +53,28 @@ input[type="file"]{
     font-weight: bold;
     font-size: 2.3rem;
 }
-#Ldesc{
+
+/* ------------------------------------------------- inputs ------------------------------------------------- */
+input[type="file"]{
+    font-size: 1.2rem;
     font-weight: bold;
-    font-size: 1.1rem;
+}
+input[type="submit"]{
+    font-size: 1.5rem;
+    background-color:rgb(0, 128, 0);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    height: 50px;
+    &:hover{
+        background-color: rgb(0, 104, 0);
+        color: rgb(214, 214, 214);
+    }
+    &:active{
+        background-color: green;
+        color: white;
+    }
 }
 textarea{
     max-width: 100%;
@@ -130,20 +87,20 @@ textarea{
     margin-bottom: 20px;
 }
 /* -------------------------------------------- Registrar funcionario -------------------------------------------- */
-.gerenciarFuncionario{
+.gerencionamentoContainer{
     display: flex;
     justify-content: center;
     width: 100%;
 }
-.registrarFuncionario{
+.gerenciarFuncionario, .gerenciarProduto{
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 20px;
-    margin-top: 50px;
+    padding-top: 50px;
     gap: 50px;
 }
-.registrarFuncionario form{
+.gerenciarFuncionario form, .gerenciarProduto form{
     display: flex;
     padding-top: 50px;
     flex-direction: column;
@@ -186,30 +143,42 @@ textarea{
 .redDot{
     color: red;
 }
-.funcionariosManager{
+
+
+.funcionariosManager, .produtosManager{
     display: flex;
     align-items: center;
-    width: 100%;
+    display: flex;
+    align-items: baseline;
+    overflow-y:auto;
+    position: relative;
+    height: calc(100vh - 200px);
 }
-.tablesFuncionarios{
+.tablesFuncionarios, .tableProdutos, .pedidosTable, .produtosInPedidoTable{
     border-collapse: collapse;
     min-width: 800px;
+    height: 100%;
 }
-.tablesFuncionarios thead{
+.tablesFuncionarios thead, .tableProdutos thead{
+    background-color: gray;
+    position: sticky;
+    top: 0;
+}
+.pedidosTable thead, .produtosInPedidoTable thead{
     background-color: gray;
 }
-.tablesFuncionarios th{
+.tablesFuncionarios th, .tableProdutos th, .pedidosTable th, .produtosInPedidoTable th{
     border: 1px solid black;
     padding: 8px;
 }
-.tablesFuncionarios td{
+.tablesFuncionarios td, .tableProdutos td, .pedidosTable td, .produtosInPedidoTable td{
     border: 1px solid black;
     text-align: center;
     min-height: 40px;
     padding: 8px;
     text-decoration: none;
 }
-#funcionario_idTable{
+#idTable{
     width: 30px;
 }
 #cpfTable{
@@ -226,6 +195,160 @@ textarea{
     min-width: 150px;
     width: 150px;
 }
+#imagemTable{
+    max-height: 50px;
+    max-width: 60px;
+    width: 60px;
+}
+#imagemTable img{
+    max-height: 50px;
+}
+#tipoTable{
+    text-transform: capitalize;
+    max-width: 75px;
+    width: 75px;
+}
+#precoTable{
+    max-width: 80px;
+    width: 80px;
+}
+#estoque_disponivelTable{
+    max-width: 50px;
+    width: 50px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+#precoTotalTable{
+    max-width: 130px;
+    width: 110px;
+}
+
+#deleteProduto{
+    max-width: 100px;
+    width: 100px;
+}
+#deleteProduto button{
+    background-color: red;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 800;
+    min-height: 100%;
+    border: none;
+    border-radius: 10px;
+    transition: .2s;
+    &:hover{
+        background-color: rgb(170, 0, 0);
+        cursor: pointer;
+    }
+    &:active{
+        background-color: red;
+    }
+}
+#deleteProduto form{
+    margin: 0;
+    height: 100%;
+    padding: 0;
+}
+
+
+
+
+
+
+.gerenciarPedidos{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+}
+.gerenciarPedidos .pedidosContainer{
+    width: 100%;
+}
+.pedidosTable, .pedidosTable td{
+    width: 100%;
+}
+.pgTitle{
+    color: white;
+    padding: 10px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: green;
+    font-size: 2rem;
+}   
+
+.produtosDoPedido{
+    position: absolute;
+    max-height: 200px;
+    max-width: 400px;
+    width: 400px;
+    height: 200px;
+    z-index:3;
+    top: 50px;
+    right: 120px;
+    background-color: rgb(218, 215, 215);
+    display: none;
+    overflow: scroll;
+}
+
+#produtosTable{
+    display: flex;
+    height: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+#produtosTable button{
+    padding: 5px;
+    text-align: center;
+    height: 50px;
+    background-color: white;
+    border: 3px solid green;
+    color: green;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    transition: .2s all;
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(230, 230, 230);
+    }
+}
+#statusTable button{
+    padding: 5px;
+    background: white;
+    font-size: 1rem;
+    transition: .2s all;
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(230, 230, 230);
+    }
+}
+#statusTable .processamento{
+    border: 2px solid red;
+    color: red;
+}
+#statusTable .Enviado{
+    border: 2px solid goldenrod;
+    color: goldenrod;
+}
+#statusTable .Entregue{
+    border: 2px solid blue;
+    color: blue;
+    pointer-events: none;
+}
+footer{
+    background-color: white;
+    height: 200px;
+    width: 100%;
+}
+
+
 
 @media screen and (max-width: 800px) {
     .tablesFuncionarios{
@@ -236,13 +359,19 @@ textarea{
         overflow-x: auto;
         width: 100%;
     }
+    .pgTitle{
+        margin-top: 100px;
+    }
 }
 @media screen and (max-width: 1200px) {
-    .registrarFuncionario{
+    .gerenciarFuncionario, .gerenciarProduto{
         flex-direction: column ;
     }
     .tablesFuncionarios{
         max-width: 100%;
         width: 100%;
+    }
+    body{
+        overflow: auto;
     }
 }

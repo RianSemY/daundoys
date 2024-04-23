@@ -11,7 +11,7 @@
     <body>
         <?php 
         require_once 'shared/header.php'; 
-        if(isset($_SESSION['login'])){
+        if(isset($_SESSION['login']) or isset($_SESSION['admin'])){
             header('location: index.php');
         }
         ?>

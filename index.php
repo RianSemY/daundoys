@@ -43,7 +43,7 @@ if($type == ''){
         <div class="produtosList">
             <?php
             require_once 'controller/produtosController.php';
-            $produtosList = loadAll();
+            $produtosList = loadAllCatalogo();
 
             foreach ($produtosList as $produto){
                 if($type == 'sedas_e_blunts'){

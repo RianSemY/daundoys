@@ -1,4 +1,17 @@
 <?php
+function atualizarEstoque($produto_id, $estoque_atualizado){
+    require_once '../model/produtosClass.php';
+    $produtos = new produtosClass();
+    $produtos->atualizarEstoque($produto_id, $estoque_atualizado);
+}
+function getEstoqueById($produto_id){
+    require_once '../model/produtosClass.php';
+    $produtos = new produtosClass();
+    $estoque = $produtos->getEstoqueById($produto_id);
+    return $estoque;
+}
+
+
 if($_POST){
     $precoTotalPedido = $_POST["precoTotalCarrinho"];
     $usuarioIDpedido = $_POST["usuarioID"];
@@ -6,37 +19,33 @@ if($_POST){
     $produtoIDlist = $_POST["produtos"];
     $produtoQTDlist = $_POST["quantidades"];
 
-    echo ('Preço total do pedido: R$'.$precoTotalPedido.'');
-    echo '<br><br>';
-    session_start();
-    require_once 'clientesController.php';
-    $nomeUsuario = loadNomeClienteInCarrinhoController($usuarioIDpedido);
-    echo ('ID da sessão:'.$nomeUsuario.'');
-    echo '<br><br>';
-    
-
-    echo 'Id list:';
-    foreach($produtoIDlist as $produtoID){
-        echo (' '.$produtoID.' ');
-    }
-
-
     if(isset($precoTotalPedido, $usuarioIDpedido, $produtoIDlist, $produtoIDlist)){
+        // if(!isset($endereco_de_destino, $forma_de_pagamento)){
+        //     session_start();
+        //     $_SESSION['payInfo'] = [];
+        //     session_abort();
+        //     header('location:../carrinho.php?cod=infoRequired');
+        //     exit();
+        // }
+        require_once '../model/produtosClass.php';
+        $podutos = new produtosClass();
+        foreach($produtoIDlist as $index => $produto_id){
+            $estoque_atual = getEstoqueById($produto_id);
+            $estoque_atualizado = $estoque_atual - $produtoQTDlist[$index];
+            atualizarEstoque($produto_id, $estoque_atualizado);
+        }
+
         require_once '../model/pedidosClass.php';
         $pedido = new pedidosClass();
         $pedido->setClienteId($usuarioIDpedido);
         $pedido->setPrecoPedido($precoTotalPedido);
-        $pedido->insert();
-
-        echo '<br><br><br><br>';
+        $lastID = $pedido->insert();
 
         require_once '../model/produtosPedidosClass.php';
         $pedidoProduto = new produtosPedidosClass();
-        // $pedidoProduto->setPedidoId();
-        $pedidoProduto->inserirCadaProduto($produtoIDlist, $produtoQTDlist);
-
-        $_SESSION['carrinho'] = [];
-        //header('location:../carrinho.php?cod=sucess');
+        $pedidoProduto->inserirCadaProduto($produtoIDlist, $produtoQTDlist, $lastID);
+        $_SESSION['carrinho'] = null;
+        header('location:../carrinho.php?cod=sucess');
     } else{
         header('location:../carrinho.php?cod=error');
     }

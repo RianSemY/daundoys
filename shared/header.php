@@ -80,7 +80,7 @@ session_start();
                 echo '<div class="dropdown">';
                     echo '<button class="dropdown-btn admButtom"><span class="material-symbols-outlined">admin_panel_settings </span>Opções de ADM</button>';
                     echo '<div class="dropdown-content">';
-                        echo '<a href="registrarProduto.php"><span class="material-symbols-outlined">inventory</span>Gerenciar novo produto</a>';
+                        echo '<a href="registrarProduto.php"><span class="material-symbols-outlined">inventory</span>Gerenciar produtos</a>';
                         echo '<a href="registrarFuncionario.php"><span class="material-symbols-outlined">manage_accounts</span>Gerenciar funcionários</a>';
                         echo '<a href="gerenciarPedidos.php"><span class="material-symbols-outlined">request_page</span>Gerenciar pedidos</a>';
                     echo '</div>';
@@ -114,12 +114,11 @@ session_start();
                 </div>
             </div>
             <?php
-
-            if(isset($_SESSION['login']) or isset($_SESSION['admin'])){
-                echo '<a href="carrinho.php"><span class="material-symbols-outlined" id="carrinho">shopping_cart </span>Carrinho</a>';
-            } else{
-                echo '<a href="login.php?cod=173"><span class="material-symbols-outlined" id="carrinho">shopping_cart </span>Carrinho</a>';
-            }                    
+                if(isset($_SESSION['login']) or isset($_SESSION['admin'])){
+                    echo '<a href="carrinho.php"><span class="material-symbols-outlined" id="carrinho">shopping_cart </span>Carrinho</a>';
+                } else{
+                    echo '<a href="login.php?cod=173"><span class="material-symbols-outlined" id="carrinho">shopping_cart </span>Carrinho</a>';
+                }                    
             ?>
         </div>
     </div>

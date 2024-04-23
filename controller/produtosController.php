@@ -1,12 +1,37 @@
 <?php
-function loadAll(){
+// function loadAllCatalogo(){
+//     require_once './model/produtosClass.php';
+//     $produtos = new produtosClass();
+//     $produtosList = $produtos->loadAllCatalogo();
+//     return $produtosList;
+// }
+
+function loadAllGerenciamento(){
     require_once './model/produtosClass.php';
     $produtos = new produtosClass();
-    $produtosList = $produtos->loadAll();
+    $produtosList = $produtos->loadAllGerenciamento();
+    return $produtosList;
+}
+function loadAllCatalogo(){
+    require_once './model/produtosClass.php';
+    $produtos = new produtosClass();
+    $produtosList = $produtos->loadAllCatalogo();
     return $produtosList;
 }
 
-if ($_POST) {
+function produtoDelete($produto_id){
+    require_once '../model/produtosClass.php';
+    $produtos = new produtosClass();
+    $produtos->produtoDelete($produto_id);
+}
+
+if ($_POST and $_POST['action'] == 'delete'){
+    $produto_id = $_POST['produto_id'];
+    produtoDelete($produto_id);
+    header('location: ../registrarProduto.php?cod=sucess');
+}
+
+if ($_POST and $_POST['action'] == 'insertProdutos') {
     if(isset($_FILES['upload'])){
         $arquivo = $_FILES['upload'];
         if($arquivo['error']){
@@ -20,7 +45,6 @@ if ($_POST) {
     
         $tipos_permitidos = array("jpg", "png", "jpeg");
         if (!in_array($tipo, $tipos_permitidos)) {
-            // Tipo de arquivo não permitido
             header('location: ../registrarProduto.php?cod=error');
             exit;
         }
@@ -36,9 +60,6 @@ if ($_POST) {
     @$tipo = $_POST['tipo'];
     @$preco = $_POST['preco'];
     @$estoque = $_POST['estoque'];
-    echo $imagem;
-    echo $nome;
-    echo $desc;
     
     if (isset($nome) and isset($desc) and isset($imagem)) {
         require_once '../model/produtosClass.php';
@@ -55,19 +76,6 @@ if ($_POST) {
     } else{
         header('location:../registrarProduto.php?cod=error');
     }
-}
-else if ($_REQUEST) {
-    if (isset($_REQUEST['cod']) && $_REQUEST['cod'] == 'del') {
-        require_once '../model/model/produtosClass.php.php';
-        $produto = new produtosClass(); 
-        if (isset($_REQUEST['id']) && !empty($_REQUEST['id'])) {
-            $produto->setId($_REQUEST['id']);
-            $total = $produto->delete();
-            if ($total == 1) {
-                header('location:../index.php?cod=success');
-            }
-        }
-    }
 } else {
-    loadAll();
+    // loadAllCatalogo();
 }

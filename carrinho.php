@@ -1,6 +1,16 @@
 <?php
 session_start();
+if(isset($_SESSION['admin'])){
+    echo '<h3>Use uma conta cliente para fazer isso</h3>';
+    exit();
+}
 
+@$cod = $_REQUEST['cod'];
+if (isset($cod)) {
+    if ($cod == 'sucess') {
+        $_SESSION['carrinho'] = [];
+    }
+}
 // Verificar se a sessão do carrinho existe e, se não, criá-la
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
@@ -49,15 +59,16 @@ if ($_POST) {
         $carrinhoPrecoProdutos = $_POST["precoProduto"];
         $carrinhoImagemProdutos = $_POST["imagemProduto"];
         $carrinhoQntRequerida = $_POST["qntRequerida"];
+        $carrinhoEstoque = $_POST["estoqueProduto"];
         for ($i = 0; $i < count($carrinhoIdProdutos); $i++) {
             $produto = [
                 'id' => $carrinhoIdProdutos[$i],
                 'nome' => $carrinhoNomeProdutos[$i],
                 'preco' => $carrinhoPrecoProdutos[$i],
                 'imagem' => $carrinhoImagemProdutos[$i],
-                'qntRequerida' => $carrinhoQntRequerida[$i]
+                'qntRequerida' => $carrinhoQntRequerida[$i],
+                'estoqueProduto' => $carrinhoEstoque[$i]
             ];
-
             $produtoNoCarrinho = false;
             foreach ($_SESSION['carrinho'] as &$item) {
                 if ($item['id'] == $produto['id']) {
@@ -93,8 +104,44 @@ foreach ($_SESSION['carrinho'] as $produto) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
+    <?php
+    if(isset($cod)){
+        if (isset($_SESSION['payInfo'])){
+            echo '<div class="infoRequiredContainer">';
+                echo '<div class="infoRequiredModal">';
+                    echo '<form action="controller/carrinhoController.php" method="post">';
+                        echo '<section class="inputInfoRequiredInputContainer">';
+                            echo '<label for="dadoBancario">Dados bancários</label>';
+                            echo '<input type="text" name="dadoBancario" id="dadoBancario" placeholder="Insira seus dados bancários">';
+                        echo '</section>';
+                        echo '<section class="inputInfoRequiredInputContainer">';
+                            echo '<label for="endereco_destinado">Endereço de destino</label>';
+                            echo '<input type="text" name="endereco_destinado" id="endereco_destinado" placeholder="Insira o endereço de destino">';
+                        echo '</section>';
+                        echo '<article class="submitContainer">';
+                            echo '<button type="submit">Enviar informações de compra <span class="material-symbols-outlined"> lock </span></button>';
+                        echo '</article>';
+                    echo '</form>';
+                echo '</div>';
+            echo '</div>';
+        }
+    }
+    ?>
     <main>
         <a href="index.php" class="backToThePage"><span class="material-symbols-outlined"> arrow_back </span></a>
+        <?php
+        if (isset($cod)) {
+            if ($cod == 'sucess') {
+                echo ('<br><p class="msgQuery carrinhoEnviado">');
+                    echo ('Seu pedido foi efetuado com sucesso!');
+                echo ('</p>');
+            } else if ($cod == 'error') {
+                echo ('<br><p class="msgQuery carrinhoNaoEnviado">');
+                    echo ('Seu pedido não pode ser efetuado!');
+                echo ('</p>');
+            }
+        }
+        ?>
         <div class="carrinhoContainer">
             <?php
 /* ----------------------------------------- ver se o carrinho está vazio ----------------------------------------- */

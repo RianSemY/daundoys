@@ -6,12 +6,13 @@
     <link rel="icon" href="https://images.vexels.com/media/users/3/286649/isolated/preview/31bd1b279101d861b2be48dc66d46d52-a-cone-de-chapa-u-de-duende-de-sa-o-patra-cio.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="css/registroADM.css">
-    <title>Daundoys - Registrar funcionário</title>
+    <title>Daundoys - Gerenciar funcionário</title>
 </head>
 <body>
+    <h1 class="pgTitle">Gerir funcionários</h1>
     <a href="index.php" class="backToThePage"><span class="material-symbols-outlined"> arrow_back </span></a>
-    <div class="gerenciarFuncionario">
-        <main class="registrarFuncionario">
+    <div class="gerencionamentoContainer">
+        <main class="gerenciarFuncionario">
             <form method="post" action="controller/registrarFuncionarioController.php" class="registroContainer">
                 <?php
                 session_start();
@@ -82,7 +83,7 @@
 
                         foreach($funcionariosList as $funcionario){
                             echo '<tr>';
-                                echo '<td id="funcionario_idTable">';
+                                echo '<td id="idTable">';
                                     echo $funcionario['funcionario_id'];
                                 echo '</td>';
                                 echo '<td id="cpfTable">';

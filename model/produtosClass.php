@@ -64,7 +64,15 @@ class produtosClass{
         $this->estoque = $estoque;
     }
 
-    public function loadAll() {
+    public function loadAllCatalogo() {
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'SELECT * FROM produtos where estoque_disponivel>0';
+        $resultList = $db->Consultar($sql);
+        $db->Desconectar();
+        return $resultList;
+    }
+    public function loadAllGerenciamento() {
         $db = new ConexaoMysql();
         $db->Conectar();
         $sql = 'SELECT * FROM produtos';
@@ -72,27 +80,45 @@ class produtosClass{
         $db->Desconectar();
         return $resultList;
     }
-
-    public function deleteFromEstoque(){
+    public function atualizarEstoque($produto_id, $estoque_atualizado){
         $db = new ConexaoMysql();
         $db->Conectar();
-        $sql = 'DELETE FROM produtos WHERE estoque_disponivel<1';
+        echo 'a';
+        $sql = 'UPDATE produtos SET estoque_disponivel="'.$estoque_atualizado.'" where produto_id="'.$produto_id.'"';
+        $db->Executar($sql);
+        $db->Desconectar();
+        return $db->total;
     }
+
+    public function getEstoqueById($produto_id) {
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'SELECT estoque_disponivel FROM produtos where produto_id="'.$produto_id.'"';
+        $result = $db->Consultar($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $estoque = $row['estoque_disponivel'];
+        } else {
+            $estoque = null;
+        }
+        $db->Desconectar();
+        return $estoque;
+    }
+
+    public function produtoDelete($produto_id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'DELETE FROM produtos WHERE produto_id="'.$produto_id.'"';
+        $db->Executar($sql);
+        $db->Desconectar();
+        echo $sql;
+        return $db->total;
+    }
+    
     public function insert() {
         $db = new ConexaoMysql();
         $db->Conectar();
         $sql = 'INSERT INTO produtos (nome, descricao, preco, estoque_disponivel, imagem, tipo) VALUES ("'.$this->nome.'","'.$this->desc.'","'.$this->preco.'","'.$this->estoque.'","'.$this->imagem.'","'.$this->tipo.'");';
-        $db->Executar($sql);
-        $db->Desconectar();
-
-        return $db->total;
-    }
-    
-    public function delete() {
-        $db = new ConexaoMysql();
-        $db->Conectar();
-        $sql = 'DELETE FROM peca WHERE id='.$this->id;
-    
         $db->Executar($sql);
         $db->Desconectar();
 
