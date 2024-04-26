@@ -43,8 +43,15 @@ if($type == ''){
         <div class="produtosList">
             <?php
             require_once 'controller/produtosController.php';
-            $produtosList = loadAllCatalogo();
-
+            if(isset($_POST['action'])){
+                if($_POST['action'] == 'search'){
+                    $produtosList = search($_POST['searchbar']);
+                } else {
+                    $produtosList = loadAllCatalogo();
+                }
+            } else {
+                $produtosList = loadAllCatalogo();
+            }  
             foreach ($produtosList as $produto){
                 if($type == 'sedas_e_blunts'){
                     if($produto['tipo'] == 'seda' || $produto['tipo'] == 'blunt'){

@@ -40,7 +40,7 @@ if ($_POST) {
                         $produto['qntRequerida'] = $novaQuantidade;
                     }
                 }
-            } else {
+            } else if($novaQuantidade <= 0){
                 // Remover o item do carrinho se a nova quantidade for menor ou igual a 0
                 foreach ($_SESSION['carrinho'] as $chave => $produto) {
                     if ($produto['id'] == $produtoId) {

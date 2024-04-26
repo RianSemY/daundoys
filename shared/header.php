@@ -65,10 +65,11 @@ session_start();
         <div class="logoContainer">
             <img src="img/logo.png" alt="logo">
         </div>
-        <div class="item">
+        <form method="POST" action="./index.php" class="item">
             <input type="text" name="searchbar" id="searchbar" placeholder="O que deseja procurar?"/>
+            <input name="action" value="search" hidden/>
             <button  type="submit" class="searchBtn"><span class="material-symbols-outlined search">search</span></button>
-        </div>
+        </form>
         
         <div class="buttons">
             <?php

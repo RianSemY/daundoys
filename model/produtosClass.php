@@ -72,6 +72,14 @@ class produtosClass{
         $db->Desconectar();
         return $resultList;
     }
+    public function searchCatalogo($search) {
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'SELECT * FROM produtos where estoque_disponivel>0 and nome like "%'.$search.'%"';
+        $resultList = $db->Consultar($sql);
+        $db->Desconectar();
+        return $resultList;
+    }
     public function loadAllGerenciamento() {
         $db = new ConexaoMysql();
         $db->Conectar();

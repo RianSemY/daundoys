@@ -18,7 +18,12 @@ function loadAllCatalogo(){
     $produtosList = $produtos->loadAllCatalogo();
     return $produtosList;
 }
-
+function search($search){
+    require_once './model/produtosClass.php';
+    $produtos = new produtosClass();
+    $produtosList = $produtos->searchCatalogo($search);
+    return $produtosList;
+}
 function produtoDelete($produto_id){
     require_once '../model/produtosClass.php';
     $produtos = new produtosClass();
