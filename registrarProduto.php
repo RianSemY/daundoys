@@ -34,6 +34,7 @@ if($_POST){
                     header('location: index.php');
                     exit();
                 }
+                @$idProduto = $_REQUEST['id'];
                 @$cod = $_REQUEST['cod'];
                 if (isset($cod)){
                     if($cod == 'error'){
@@ -45,10 +46,18 @@ if($_POST){
                     }
                 }
                 ?>
-                <input type="hidden" name="action" value="insertProdutos">
+                
+                <?php
+                if (!isset($idProduto)){
+                    echo '<input type="hidden" name="action" value="insertProdutos">';
+                } else{
+                    echo '<input type="hidden" name="action" value="editProdutos">';
+                    echo '<input type="hidden" name="idProduto" value="'.$idProduto.'">';
+                }
+                ?>
                 <div class="inputGroup">
                     <labeL for="nome">Nome da produto: </label>
-                    <input type="text" name="nome" id="nome" value="" value="" required placeholder="Insira o nome da produto">
+                    <input type="text" name="nome" id="nome" value="" required placeholder="Insira o nome da produto">
                 </div>
 
                 <div class="inputGroup">
@@ -81,6 +90,7 @@ if($_POST){
                         <th>Tipo</th>
                         <th>Nº em estoque</th>
                         <th>Preço unitário</th>
+                        <th>Editar produto</th>
                         <th>Deletar produto</th>
                     </thead>
                     <tbody>
@@ -130,6 +140,9 @@ if($_POST){
 
                             echo '<td id="precoTable">';
                                 echo 'R$'.number_format($produto['preco'], 2, ',', '.').'';
+                            echo '</td>';
+                            echo '<td id="editProduto">';
+                                echo '<a href="registrarProduto.php?id='.$produto['produto_id'].'">Editar produto</a>';
                             echo '</td>';
                             echo '<td id="deleteProduto">';
                                 echo '<form action="controller/produtosController.php" method="post">

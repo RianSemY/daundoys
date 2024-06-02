@@ -36,7 +36,9 @@ if ($_POST and $_POST['action'] == 'delete'){
     header('location: ../registrarProduto.php?cod=sucess');
 }
 
-if ($_POST and $_POST['action'] == 'insertProdutos') {
+//fazer um if($_POST) e depois eu vejo se é pra editar ou adicionar um novo com action e name
+
+if($_POST and $_POST['action'] == 'editProdutos' or $_POST and $_POST['action'] == 'insertProdutos'){
     if(isset($_FILES['upload'])){
         $arquivo = $_FILES['upload'];
         if($arquivo['error']){
@@ -65,8 +67,9 @@ if ($_POST and $_POST['action'] == 'insertProdutos') {
     @$tipo = $_POST['tipo'];
     @$preco = $_POST['preco'];
     @$estoque = $_POST['estoque'];
+
     
-    if (isset($nome) and isset($desc) and isset($imagem)) {
+    if (isset($nome, $desc, $imagem, $preco, $tipo, $estoque)) {
         require_once '../model/produtosClass.php';
         $produto = new produtosClass();
         $produto->setImagem($imagem);
@@ -75,12 +78,17 @@ if ($_POST and $_POST['action'] == 'insertProdutos') {
         $produto->setPreco($preco);
         $produto->setTipo($tipo);
         $produto->setEstoque($estoque);
-        
-        $produto->insert();
-        header('location:../registrarProduto.php?cod=sucess');
+        if($_POST['action'] == 'insertProdutos'){
+            $produto->insert();
+            header('location:../registrarProduto.php?cod=sucess');
+        }
+        else{
+            $produto_id = $_POST['idProduto'];
+            $produto->updateProduto($produto_id);
+            header('location: ../registrarProduto.php?cod=sucess&&id='.$produto_id.'');
+        }
     } else{
         header('location:../registrarProduto.php?cod=error');
     }
-} else {
-    // loadAllCatalogo();
-}
+} else{} 
+

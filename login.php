@@ -5,7 +5,7 @@
         header('location: index.php');
         exit();
     }
-    session_abort();
+    
 
 ?>
 <!DOCTYPE html>

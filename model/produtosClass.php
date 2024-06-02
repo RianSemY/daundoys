@@ -91,8 +91,16 @@ class produtosClass{
     public function atualizarEstoque($produto_id, $estoque_atualizado){
         $db = new ConexaoMysql();
         $db->Conectar();
-        echo 'a';
         $sql = 'UPDATE produtos SET estoque_disponivel="'.$estoque_atualizado.'" where produto_id="'.$produto_id.'"';
+        $db->Executar($sql);
+        $db->Desconectar();
+        return $db->total;
+    }
+    public function updateProduto($produto_id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        echo 'a';
+        $sql = 'UPDATE produtos SET nome="'.$this->nome.'", descricao="'.$this->desc.'", preco="'.$this->preco.'", estoque_disponivel="'.$this->estoque.'", imagem="'.$this->imagem.'", tipo="'.$this->tipo.'" where produto_id="'.$produto_id.'"';
         $db->Executar($sql);
         $db->Desconectar();
         return $db->total;
