@@ -20,7 +20,7 @@
 </head>
 <body>
     <?php 
-    require_once 'shared/header.php';
+    @require_once 'shared/header.php';
     ?>
     <main class="bodyLogin">
         <div class="imgLogin"><img src="img/duendeLogin.png" alt=""></div>

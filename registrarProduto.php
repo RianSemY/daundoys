@@ -48,35 +48,40 @@ if($_POST){
                 ?>
                 
                 <?php
+                require_once 'controller/produtosController.php';
                 if (!isset($idProduto)){
                     echo '<input type="hidden" name="action" value="insertProdutos">';
                 } else{
                     echo '<input type="hidden" name="action" value="editProdutos">';
                     echo '<input type="hidden" name="idProduto" value="'.$idProduto.'">';
+                    $produtoManager = loadAllById($idProduto);
                 }
+                
+                
+                
                 ?>
                 <div class="inputGroup">
                     <labeL for="nome">Nome da produto: </label>
-                    <input type="text" name="nome" id="nome" value="" required placeholder="Insira o nome da produto">
+                    <input type="text" name="nome" id="nome" value="<?php if(isset($idProduto)){ echo $produtoManager['nome'];} ?>" required placeholder="Insira o nome da produto">
                 </div>
 
                 <div class="inputGroup">
                     <labeL for="tipo">Tipo da produto: </label>
-                    <input type="text" name="tipo" id="tipo" value="" required placeholder="Insira o tipo da produto">
+                    <input type="text" name="tipo" id="tipo" value="<?php if(isset($idProduto)){ echo $produtoManager['tipo'];} ?>" required placeholder="Insira o tipo da produto">
                 </div>
 
                 <div class="inputGroup">
                     <labeL for="estoque">Número em estoque da produto: </label>
-                    <input type="number" name="estoque"  id="estoque" value="" required placeholder="Insira o número de estoque da produto">
+                    <input type="number" name="estoque"  id="estoque" value="<?php if(isset($idProduto)){ echo $produtoManager['estoque_disponivel'];} ?>" required placeholder="Insira o número de estoque da produto">
                 </div>
 
                 <div class="inputGroup">
                     <labeL for="preco">Preco da produto: </label>
-                    <input type="text" name="preco" id="preco" value=""  required placeholder="Insira o preco da produto">
+                    <input type="text" name="preco" id="preco" value="<?php if(isset($idProduto)){ echo $produtoManager['preco'];} ?>"  required placeholder="Insira o preco da produto">
                 </div>
                 <div class="inputGroup">
                     <labeL id="Ldesc" for="descricao">Descrição da produto: </label>
-                    <textarea spellcheck="false" name="descricao" id="desc" value="" required placeholder="Insira a descrição da produto"></textarea>
+                    <textarea spellcheck="false" name="descricao" id="desc" required placeholder="Insira a descrição da produto"><?php if(isset($idProduto)){ echo $produtoManager['descricao'];} ?></textarea>
                 </div>
                 <input type="file" id="upload" name="upload" value="" required accept=".jpg, .jpeg, .png">
                 <input type="submit" value="Enviar">
@@ -95,7 +100,6 @@ if($_POST){
                     </thead>
                     <tbody>
                         <?php
-                        require_once 'controller/produtosController.php';
                         $produtosList = loadAllGerenciamento();
                         foreach($produtosList as $produto){
                             echo '<tr>';

@@ -72,6 +72,14 @@ class produtosClass{
         $db->Desconectar();
         return $resultList;
     }
+    public function loadAllById($produto_id){
+        $db = new ConexaoMysql();
+        $db->Conectar();
+        $sql = 'SELECT * FROM produtos where produto_id='.$produto_id.'';
+        $resultList = $db->Consultar($sql);
+        $db->Desconectar();
+        return $resultList;
+    }
     public function searchCatalogo($search) {
         $db = new ConexaoMysql();
         $db->Conectar();
